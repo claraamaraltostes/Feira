@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" fill="none">
+  <!-- Tachinha Klayfair: adesivo recortado com borda de papel -->
+  <g transform="rotate(-24 32 40)">
+    <g fill="#FFFFFF" stroke="#FFFFFF" stroke-width="6" stroke-linejoin="round">
+      <ellipse cx="32" cy="12" rx="13" ry="6"/>
+      <path d="M19 12V17L23 33H41L45 17V12Z"/>
+      <ellipse cx="32" cy="36" rx="16" ry="6.5"/>
+      <path d="M32 40V72"/>
+    </g>
+    <path d="M32 40V73" stroke="#7C8A90" stroke-width="2.6" stroke-linecap="round"/>
+    <path d="M32 40V60" stroke="#B9C3C7" stroke-width="1" stroke-linecap="round"/>
+    <path d="M16 36C16 39.6 23.2 42.5 32 42.5C40.8 42.5 48 39.6 48 36V33.5H16Z" fill="#8E211B"/>
+    <ellipse cx="32" cy="33.5" rx="16" ry="6.5" fill="#D93829"/>
+    <path d="M19 12V17L23 32H41L45 17V12Z" fill="#B42C22"/>
+    <path d="M23.5 18L26 31H29L27.5 18Z" fill="#FFFFFF" opacity="0.35"/>
+    <path d="M19 12V15.5C19 18.8 24.8 21.5 32 21.5C39.2 21.5 45 18.8 45 15.5V12Z" fill="#8E211B"/>
+    <ellipse cx="32" cy="12" rx="13" ry="6" fill="#E04A3C"/>
+    <ellipse cx="27" cy="10.2" rx="5" ry="2" fill="#FFFFFF" opacity="0.55"/>
+    <ellipse cx="24" cy="32" rx="4" ry="1.4" fill="#FFFFFF" opacity="0.4"/>
+  </g>
+</svg>
