@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 160" fill="none">
+  <!-- Balão de fala Klayfair: papel recortado com sombra dura azul petróleo -->
+  <path d="M46 26L92 12L150 14L190 32L206 64L200 98L172 120L118 128L70 124L50 132L22 152L34 122L16 98L12 62L24 38Z" fill="#123742" transform="translate(5 5)"/>
+  <path d="M46 26L92 12L150 14L190 32L206 64L200 98L172 120L118 128L70 124L50 132L22 152L34 122L16 98L12 62L24 38Z" fill="#FFFFFF" stroke="#123742" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M40 44L54 36M162 30L176 40" stroke="#BCD0E6" stroke-width="3" stroke-linecap="round"/>
+</svg>

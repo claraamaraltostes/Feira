@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 150" fill="none">
+  <!-- Exclamação Klayfair: recorte vermelho sobre papel branco -->
+  <g transform="rotate(4 30 75)">
+    <path d="M8 6L52 3L46 106L16 108Z M18 114L42 112L48 130L36 146L16 145L10 128Z" fill="#123742" transform="translate(3 3)"/>
+    <path d="M8 6L52 3L46 106L16 108Z M18 114L42 112L48 130L36 146L16 145L10 128Z" fill="#FFFFFF" stroke="#DCD2C1" stroke-width="1.5" stroke-linejoin="round"/>
+    <path d="M15 12L45 10L40 98L21 99Z" fill="#C8352B"/>
+    <path d="M15 12L45 10L44 22L16 24Z" fill="#E04A3C"/>
+    <path d="M21 120L37 119L41 130L33 139L20 138L17 128Z" fill="#C8352B"/>
+  </g>
+</svg>

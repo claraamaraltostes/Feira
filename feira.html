@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Feira Virtual de Processos — Barro &amp; Mão</title>
+    <title>Klayfair — Feira Virtual de Processos</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet">
@@ -2174,6 +2174,9 @@
         }
 
         .welcome-stall-card {
+            width: clamp(148px, 42vw, 178px);
+            height: clamp(138px, 39vw, 164px);
+            margin-bottom: 14px;
             border-radius: 6px;
             border: none;
             background-color: #FFFFFF;
@@ -2188,11 +2191,11 @@
         .welcome-stall-card::after {
             content: '';
             position: absolute;
-            right: -14px;
-            bottom: -10px;
-            width: 40px;
-            height: 48px;
-            background: url('assets/tachinha.png') center / contain no-repeat;
+            right: -16px;
+            bottom: -14px;
+            width: 42px;
+            height: 52px;
+            background: url('assets/pin.svg') center / contain no-repeat;
             transform: rotate(8deg);
             filter: drop-shadow(1px 3px 2px rgba(18, 55, 66, 0.25));
         }
@@ -2203,13 +2206,12 @@
             left: max(0px, calc(50% - 205px));
             width: 132px;
             height: 98px;
-            background: url('assets/balao-fala.png') center / contain no-repeat;
-            filter: drop-shadow(1px 3px 3px rgba(18, 55, 66, 0.18));
+            background: url('assets/balao.svg') center / contain no-repeat;
             transform: rotate(-6deg);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 0 10px 18px 16px;
+            padding: 0 6px 22px 12px;
             z-index: 4;
         }
 
@@ -2222,13 +2224,31 @@
             text-align: center;
         }
 
+        .brand-wordmark {
+            font-family: var(--font-display);
+            font-variation-settings: "SOFT" 100, "WONK" 1;
+            font-size: clamp(46px, 14vw, 60px);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.035em;
+            color: var(--petrol-dark);
+            background-color: #FFFFFF;
+            padding: 8px 22px 12px;
+            margin-top: 6px;
+            box-shadow: var(--cut-shadow);
+            transform: rotate(-2deg);
+            clip-path: polygon(1% 5%, 24% 0, 58% 4%, 99% 0, 100% 48%, 98% 100%, 62% 96%, 30% 100%, 0 97%, 2% 52%);
+        }
+
         .welcome-title {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            justify-content: center;
             align-items: center;
-            gap: 6px;
+            gap: 6px 4px;
+            font-size: clamp(20px, 5.6vw, 24px);
             line-height: 1;
-            margin-top: 4px;
+            margin-top: 14px;
         }
 
         .welcome-title .title-paper {
@@ -2237,17 +2257,17 @@
             background-size: 520px auto;
             background-blend-mode: multiply;
             color: var(--petrol-dark);
-            padding: 8px 16px 10px;
+            padding: 7px 12px 9px;
             box-shadow: var(--cut-shadow);
-            transform: rotate(-1.5deg);
+            transform: rotate(1deg);
             clip-path: polygon(0 4%, 6% 0, 40% 3%, 72% 0, 100% 5%, 98% 52%, 100% 96%, 64% 100%, 30% 97%, 2% 100%, 1% 48%);
         }
 
         .welcome-title .title-cut {
             background-color: var(--petrol-primary);
             color: #FFFFFF;
-            padding: 8px 18px 11px;
-            transform: rotate(2deg);
+            padding: 7px 14px 9px;
+            transform: rotate(-1.5deg);
             box-shadow: var(--cut-shadow);
             clip-path: polygon(2% 6%, 30% 0, 66% 4%, 98% 0, 100% 46%, 97% 100%, 58% 95%, 22% 100%, 0 94%, 3% 50%);
         }
@@ -2393,18 +2413,14 @@
 
         .artisanal-booth-card {
             position: relative;
-            background-color: var(--paper-card);
-            background-image: var(--paper-texture);
-            background-size: 520px auto;
-            background-blend-mode: multiply;
+            background-color: #FFFFFF;
+            background-image: none;
             border: none;
             border-radius: 6px;
             overflow: visible;
             box-shadow: var(--cut-shadow);
         }
 
-        .artisanal-booth-card:nth-child(odd) { transform: rotate(-0.5deg); }
-        .artisanal-booth-card:nth-child(even) { transform: rotate(0.5deg); }
 
         .artisanal-booth-card:hover {
             box-shadow: 1px 2px 0 rgba(18, 55, 66, 0.12), 0 14px 26px rgba(18, 55, 66, 0.14);
@@ -2415,7 +2431,7 @@
         }
 
         .booth-awning-header::after {
-            background-image: radial-gradient(circle at 12px 0, transparent 11px, var(--paper-card) 12px);
+            background-image: radial-gradient(circle at 12px 0, transparent 11px, #FFFFFF 12px);
         }
 
         .booth-awning-header.theme-sky {
@@ -2483,11 +2499,11 @@
         .triptych-item:nth-child(1)::before {
             content: '';
             position: absolute;
-            top: -12px;
-            left: -6px;
-            width: 22px;
-            height: 26px;
-            background: url('assets/tachinha.png') center / contain no-repeat;
+            top: -14px;
+            left: -8px;
+            width: 24px;
+            height: 30px;
+            background: url('assets/pin.svg') center / contain no-repeat;
             transform: rotate(-18deg);
             filter: drop-shadow(1px 2px 1px rgba(18, 55, 66, 0.25));
             z-index: 2;
@@ -2737,10 +2753,22 @@
             color: var(--petrol-dark);
         }
 
-        .mgr-process-item,
-        .interaction-card,
         .fair-event-card,
         .visual-calendar-card {
+            background-color: #FFFFFF;
+            background-image: none;
+            border: none;
+            border-radius: 6px;
+            box-shadow: var(--cut-shadow);
+        }
+
+        .fair-economics-strip,
+        .cal-day-cell {
+            background-color: var(--bg-cream);
+        }
+
+        .mgr-process-item,
+        .interaction-card {
             background-color: var(--paper-card);
             background-image: var(--paper-texture);
             background-size: 520px auto;
@@ -2908,7 +2936,7 @@
 
             <div class="welcome-center">
                 <div class="welcome-speech" aria-hidden="true">
-                    <span>Vem ver o barro<br>virar peça!</span>
+                    <span>Vem ver<br>o barro virar<br>peça!</span>
                 </div>
                 <div class="welcome-stall-card taped">
                     <svg viewBox="0 0 164 152" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -2950,7 +2978,8 @@
                     </svg>
                 </div>
 
-                <h1 class="welcome-title"><span class="title-paper">Feira Virtual de</span> <span class="title-cut">Processos</span></h1>
+                <h1 class="brand-wordmark">Klayfair</h1>
+                <p class="welcome-title"><span class="title-paper">Feira Virtual de</span> <span class="title-cut">Processos</span></p>
                 <p class="welcome-subtitle">
                     Cada peça de barro carrega dias de torno, fogo e histórias reais. Escolha como você quer entrar hoje na feira.
                 </p>
@@ -3026,7 +3055,7 @@
                     <span>←</span>
                     <span>Início</span>
                 </button>
-                <span class="header-step-tag">Feira de Cerâmica • RJ</span>
+                <span class="header-step-tag">Klayfair • Cerâmica RJ</span>
                 <button type="button" class="btn-nav-pill accent" onclick="openAgendaModal('list')">
                     <span>📅 Agenda</span>
                 </button>
@@ -3439,7 +3468,7 @@
                 </form>
 
                 <div class="security-note-box">
-                    <img src="assets/exclamacao.png" alt="" class="note-exclaim" width="20" height="53">
+                    <img src="assets/exclamacao.svg" alt="" class="note-exclaim" width="20" height="50">
                     <span>
                         <strong>Proteção de Perfil:</strong> Cada artesão possui credenciais próprias. Nenhuma barraca exibe atalhos ou permite acesso ao painel de outro expositor.
                     </span>
