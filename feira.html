@@ -6,38 +6,55 @@
     <title>Feira Virtual de Processos — Barro &amp; Mão</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
     
     <style id="core-styles">
         /* ==========================================================================
            DESIGN TOKENS & PALETA DE CORES (Laranja Terracota + Azul Petróleo + Creme)
            ========================================================================== */
         :root {
-            --bg-canvas: #E6E0D6;
-            --bg-cream: #FAF7F2;
-            --bg-sand: #F2ECE1;
+            /* Neutros frios levemente azulados (uma única família de cinza) */
+            --bg-canvas: #D8E3E9;
+            --bg-cream: #F4F8FA;
+            --bg-sand: #E7EFF3;
             --bg-card: #FFFFFF;
+
+            /* Azul petróleo — cor principal de marca, botões e títulos */
+            --petrol-primary: #1B4D5C;
+            --petrol-dark: #123742;
+            --petrol-light: #2B6D80;
+            --petrol-soft: #E2EEF2;
+            --petrol-line: #C3DAE2;
+
+            /* Azul cobalto — destaque, foco, seleção e realces */
+            --cobalt-glow: #3A64E8;
+            --cobalt-deep: #2A4FC0;
+            --cobalt-soft: #6C8EF5;
+            --cobalt-tint: #E8EEFD;
+            --cobalt-line: #C6D4F8;
+
+            /* Terracota — acento pontual (afeto, eventual, ilustrações de barro) */
             --terracotta-primary: #D95D39;
             --terracotta-light: #E87A5D;
             --terracotta-dark: #B54322;
             --terracotta-soft: #FBECE6;
-            --petrol-primary: #1B4D5C;
-            --petrol-dark: #123742;
-            --petrol-light: #2B6D80;
-            --petrol-soft: #E4EFF2;
-            --cobalt-glow: #3A64E8;
-            --cobalt-soft: #6C8EF5;
+
             --stall-red: #D93829;
             --stall-white: #FFFFFF;
-            --text-primary: #1D2B30;
-            --text-secondary: #58666B;
-            --text-muted: #889499;
-            --border-subtle: #E1DCD3;
-            --success-green: #2E7D5B;
-            --success-soft: #E6F4EE;
-            --font-display: 'Bebas Neue', sans-serif;
-            --font-ui: 'Outfit', sans-serif;
-            --font-body: 'Plus Jakarta Sans', sans-serif;
+
+            /* Texto com contraste AA sobre fundos claros */
+            --text-primary: #14262D;
+            --text-secondary: #455760;
+            --text-muted: #5E6F77;
+            --border-subtle: #D3E0E6;
+            --success-green: #23694B;
+            --success-soft: #E3F3EB;
+
+            --focus-ring: 0 0 0 3px rgba(58, 100, 232, 0.35);
+
+            --font-display: 'Bricolage Grotesque', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+            --font-ui: 'Bricolage Grotesque', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+            --font-body: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
 
         * {
@@ -54,8 +71,10 @@
             background-color: var(--bg-canvas);
             color: var(--text-primary);
             font-family: var(--font-body);
-            line-height: 1.5;
-            min-height: 100vh;
+            font-size: 15px;
+            line-height: 1.55;
+            min-height: 100dvh;
+            text-rendering: optimizeLegibility;
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -92,7 +111,7 @@
                 radial-gradient(circle at 22% 18%, rgba(58, 100, 232, 0.34) 0%, transparent 52%),
                 radial-gradient(circle at 80% 34%, rgba(27, 77, 92, 0.32) 0%, transparent 56%),
                 radial-gradient(circle at 32% 72%, rgba(84, 128, 245, 0.30) 0%, transparent 58%),
-                linear-gradient(165deg, #DCE7FB 0%, #E7F0FA 44%, #F4EFE8 84%, #FAF7F2 100%);
+                linear-gradient(165deg, #D9E5FB 0%, #E5EFF8 46%, #EEF4F8 84%, #F4F8FA 100%);
         }
 
         /* Anéis azuis difusos estilo pôster artesanal + pontilhado de argila */
@@ -143,7 +162,7 @@
         /* Textura artesanal salpicada (pintas de ferro na cerâmica) */
         .ceramic-speckle-surface {
             background-image:
-                radial-gradient(rgba(92, 68, 52, 0.13) 1px, transparent 1px),
+                radial-gradient(rgba(27, 77, 92, 0.13) 1px, transparent 1px),
                 radial-gradient(rgba(27, 77, 92, 0.10) 1.2px, transparent 1.2px);
             background-size: 26px 26px, 37px 37px;
             background-position: 0 0, 13px 17px;
@@ -153,13 +172,13 @@
             align-self: center;
             background-color: rgba(255, 255, 255, 0.86);
             backdrop-filter: blur(8px);
-            border: 1.5px solid #B8CCE8;
+            border: 1.5px solid var(--cobalt-line);
             padding: 6px 14px;
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
             gap: 7px;
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 700;
             color: var(--petrol-dark);
             box-shadow: 0 6px 16px rgba(34, 67, 148, 0.10);
@@ -183,9 +202,9 @@
         .welcome-stall-card {
             width: clamp(176px, 54vw, 218px);
             height: clamp(162px, 50vw, 202px);
-            background-color: rgba(255, 253, 249, 0.94);
+            background-color: rgba(255, 255, 255, 0.94);
             background-image:
-                radial-gradient(rgba(92, 68, 52, 0.14) 1px, transparent 1px),
+                radial-gradient(rgba(27, 77, 92, 0.14) 1px, transparent 1px),
                 radial-gradient(rgba(58, 100, 232, 0.10) 1.2px, transparent 1.2px);
             background-size: 24px 24px, 33px 33px;
             background-position: 0 0, 11px 15px;
@@ -215,11 +234,11 @@
         }
 
         .cute-clay-chip {
-            background-color: rgba(255, 253, 249, 0.88);
-            border: 1.5px solid #C8D7EC;
+            background-color: rgba(255, 255, 255, 0.88);
+            border: 1.5px solid var(--cobalt-line);
             border-radius: 999px;
             padding: 4px 10px;
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--petrol-dark);
             display: inline-flex;
@@ -240,86 +259,27 @@
             display: flex;
         }
 
-        /* ==========================================================================
-           TELA 1: ENTRADA / PORTÃO DE ACESSO (QR CODE)
-           ========================================================================== */
-        .welcome-screen {
-            padding: 20px clamp(16px, 5vw, 24px) calc(24px + env(safe-area-inset-bottom, 0px));
-            justify-content: space-between;
-            gap: 16px;
-            background: radial-gradient(circle at 50% 16%, #FBECE6 0%, #EDF3F5 52%, #FAF7F2 100%);
-        }
-
-        .welcome-top-pill {
-            align-self: center;
-            background-color: var(--petrol-soft);
-            border: 1px solid #C5DCE3;
-            padding: 6px 14px;
-            border-radius: 999px;
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--petrol-dark);
-            box-shadow: 0 4px 12px rgba(27, 77, 92, 0.06);
-        }
-
-        .live-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background-color: var(--terracotta-primary);
-        }
-
-        .welcome-center {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            margin: 16px 0;
-        }
-
-        .welcome-stall-card {
-            width: clamp(168px, 52vw, 210px);
-            height: clamp(156px, 48vw, 196px);
-            background-color: var(--bg-card);
-            border-radius: 36px;
-            border: 1px solid var(--border-subtle);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 16px 36px rgba(217, 93, 57, 0.10);
-            margin-bottom: clamp(16px, 4vw, 24px);
-            position: relative;
-        }
-
-        .welcome-stall-card svg {
-            width: 72%;
-            height: auto;
-        }
-
         .welcome-title {
             font-family: var(--font-display);
-            font-size: clamp(32px, 9.2vw, 39px);
-            font-weight: 400;
+            font-size: clamp(28px, 7.8vw, 34px);
+            font-weight: 800;
             color: var(--petrol-dark);
-            line-height: 1.03;
-            letter-spacing: 0.025em;
-            text-transform: uppercase;
+            line-height: 1.08;
+            letter-spacing: -0.025em;
+            text-wrap: balance;
         }
 
         .welcome-title span {
-            color: var(--terracotta-primary);
+            color: var(--cobalt-deep);
         }
 
         .welcome-subtitle {
-            font-size: clamp(12.5px, 3.6vw, 13.5px);
+            font-size: clamp(14.5px, 4vw, 15.5px);
             color: var(--text-secondary);
             margin-top: 10px;
-            max-width: 310px;
-            line-height: 1.55;
+            max-width: 330px;
+            line-height: 1.6;
+            text-wrap: pretty;
         }
 
         .welcome-actions {
@@ -332,7 +292,7 @@
         .btn-role-primary {
             width: 100%;
             min-height: 56px;
-            background-color: var(--terracotta-primary);
+            background-color: var(--petrol-primary);
             color: #FFFFFF;
             border: none;
             border-radius: 20px;
@@ -343,12 +303,12 @@
             align-items: center;
             justify-content: space-between;
             gap: 10px;
-            box-shadow: 0 10px 24px rgba(217, 93, 57, 0.28);
+            box-shadow: 0 12px 26px rgba(18, 55, 66, 0.30);
             transition: background-color 0.2s ease, transform 0.15s ease;
         }
 
         .btn-role-primary:hover {
-            background-color: var(--terracotta-dark);
+            background-color: var(--petrol-dark);
         }
 
         .btn-role-primary:active {
@@ -360,8 +320,9 @@
             min-height: 56px;
             background-color: var(--bg-card);
             color: var(--petrol-dark);
-            border: 1.5px solid #C8D9DF;
+            border: 1.5px solid var(--petrol-line);
             border-radius: 20px;
+            box-shadow: 0 6px 16px rgba(18, 55, 66, 0.06);
             padding: 14px 16px;
             font-family: var(--font-body);
             cursor: pointer;
@@ -399,7 +360,7 @@
         }
 
         .role-icon-box.on-orange {
-            background-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.16);
             color: #FFFFFF;
         }
 
@@ -410,16 +371,17 @@
 
         .role-btn-title {
             display: block;
-            font-size: 14.5px;
+            font-size: 16px;
             font-weight: 700;
             line-height: 1.2;
         }
 
         .role-btn-desc {
             display: block;
-            font-size: 11.5px;
-            opacity: 0.86;
-            margin-top: 2px;
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 3px;
+            line-height: 1.35;
         }
 
         .register-prompt {
@@ -431,7 +393,7 @@
             background: none;
             border: none;
             font-family: var(--font-body);
-            font-size: 12.5px;
+            font-size: 14px;
             color: var(--text-secondary);
             cursor: pointer;
             padding: 6px 12px;
@@ -444,7 +406,7 @@
         }
 
         .btn-register-link strong {
-            color: var(--petrol-primary);
+            color: var(--cobalt-deep);
             text-decoration: underline;
             text-underline-offset: 3px;
         }
@@ -456,7 +418,7 @@
             position: sticky;
             top: 0;
             z-index: 40;
-            background-color: rgba(250, 247, 242, 0.94);
+            background-color: rgba(244, 248, 250, 0.94);
             backdrop-filter: blur(10px);
             padding: 12px clamp(14px, 4vw, 18px);
             display: flex;
@@ -473,7 +435,7 @@
             border-radius: 999px;
             padding: 7px 13px;
             font-family: var(--font-body);
-            font-size: 12px;
+            font-size: 13.5px;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -487,20 +449,20 @@
         }
 
         .btn-nav-pill.accent {
-            background-color: var(--terracotta-soft);
-            color: var(--terracotta-dark);
+            background-color: var(--cobalt-tint);
+            color: var(--cobalt-deep);
         }
 
         .btn-nav-pill.accent:hover {
-            background-color: #F7DCD1;
+            background-color: var(--cobalt-line);
         }
 
         .header-step-tag {
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 700;
             color: var(--petrol-dark);
             background-color: var(--petrol-soft);
-            border: 1px solid #C7DCE2;
+            border: 1px solid var(--petrol-line);
             padding: 5px 11px;
             border-radius: 999px;
         }
@@ -521,7 +483,7 @@
             align-items: center;
             gap: 12px;
             background-color: var(--petrol-soft);
-            border: 1px solid #C8DCE2;
+            border: 1px solid var(--petrol-line);
             border-radius: 22px;
             padding: 12px 14px;
         }
@@ -557,10 +519,10 @@
 
         .security-note-box {
             background-color: var(--petrol-soft);
-            border: 1px solid #C8DCE2;
+            border: 1px solid var(--petrol-line);
             border-radius: 18px;
             padding: 12px 14px;
-            font-size: 11.5px;
+            font-size: 13px;
             color: var(--petrol-dark);
             line-height: 1.45;
             display: flex;
@@ -589,14 +551,14 @@
         }
 
         .fair-pill-btn {
-            background-color: #EFE8DD;
+            background-color: #E7EFF3;
             color: var(--text-primary);
             border: 1px solid var(--border-subtle);
             border-radius: 999px;
             padding: 8px 14px;
             min-height: 36px;
             font-family: var(--font-body);
-            font-size: 11.5px;
+            font-size: 13px;
             font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
@@ -620,10 +582,10 @@
         }
 
         .artisanal-booth-card {
-            background-color: #FFFDF9;
-            background-image: radial-gradient(rgba(92, 68, 52, 0.11) 1px, transparent 1px);
+            background-color: #FFFFFF;
+            background-image: radial-gradient(rgba(27, 77, 92, 0.11) 1px, transparent 1px);
             background-size: 22px 22px;
-            border: 1.5px solid #E2D6C8;
+            border: 1.5px solid #D3E0E6;
             border-radius: 28px;
             overflow: hidden;
             box-shadow: 0 10px 26px rgba(27, 77, 92, 0.07);
@@ -646,10 +608,10 @@
             gap: 5px;
             background: repeating-linear-gradient(
                 90deg,
-                #D95D39 0px,
-                #D95D39 24px,
-                #FAF4EB 24px,
-                #FAF4EB 48px
+                var(--petrol-light) 0px,
+                var(--petrol-light) 24px,
+                #F4F8FA 24px,
+                #F4F8FA 48px
             );
         }
 
@@ -660,7 +622,7 @@
             right: 0;
             bottom: -7px;
             height: 14px;
-            background-image: radial-gradient(circle at 12px 0, transparent 11px, #FFFDF9 12px);
+            background-image: radial-gradient(circle at 12px 0, transparent 11px, #FFFFFF 12px);
             background-size: 24px 14px;
             pointer-events: none;
         }
@@ -668,36 +630,36 @@
         .booth-awning-header.theme-clay {
             background: repeating-linear-gradient(
                 90deg,
-                #8C4A2B 0px,
-                #8C4A2B 24px,
-                #FAF4EB 24px,
-                #FAF4EB 48px
+                #C9583A 0px,
+                #C9583A 24px,
+                #F4F8FA 24px,
+                #F4F8FA 48px
             );
         }
 
         .booth-awning-header.theme-olive {
             background: repeating-linear-gradient(
                 90deg,
-                #1B4D5C 0px,
-                #1B4D5C 24px,
-                #FAF4EB 24px,
-                #FAF4EB 48px
+                var(--cobalt-deep) 0px,
+                var(--cobalt-deep) 24px,
+                #F4F8FA 24px,
+                #F4F8FA 48px
             );
         }
 
         .awning-loc-pill {
             position: relative;
             z-index: 2;
-            background-color: rgba(255, 253, 249, 0.96);
+            background-color: rgba(255, 255, 255, 0.96);
             color: var(--text-primary);
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
             padding: 3px 9px;
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 2px 6px rgba(18, 55, 66, 0.10);
         }
 
         .awning-status-pill {
@@ -705,14 +667,14 @@
             z-index: 2;
             background-color: var(--petrol-primary);
             color: #FFFFFF;
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
             padding: 3px 9px;
             border-radius: 999px;
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 2px 6px rgba(18, 55, 66, 0.16);
         }
 
         .awning-status-pill.soft-olive {
@@ -721,8 +683,8 @@
         }
 
         .awning-status-pill.soft-cream {
-            background-color: rgba(255, 253, 249, 0.96);
-            color: #6B3624;
+            background-color: rgba(255, 255, 255, 0.96);
+            color: var(--petrol-dark);
         }
 
         .booth-card-body {
@@ -755,7 +717,7 @@
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid #FFFFFF;
-            box-shadow: 0 3px 10px rgba(44, 36, 32, 0.12);
+            box-shadow: 0 3px 10px rgba(14, 38, 48, 0.12);
         }
 
         .booth-verified-dot {
@@ -767,7 +729,7 @@
             border-radius: 50%;
             background-color: var(--petrol-primary);
             color: #FFFFFF;
-            font-size: 9px;
+            font-size: 11px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -777,16 +739,16 @@
 
         .booth-artisan-title {
             font-family: var(--font-display);
-            font-size: 21px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
+            font-size: 19px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
             color: var(--petrol-dark);
             line-height: 1.1;
         }
 
         .booth-artisan-sub {
             display: block;
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 600;
             color: var(--text-secondary);
             margin-top: 2px;
@@ -815,10 +777,11 @@
         }
 
         .booth-bio-copy {
-            font-size: 12.5px;
+            font-size: 14px;
             color: var(--text-primary);
-            line-height: 1.5;
+            line-height: 1.6;
             margin-top: 10px;
+            text-wrap: pretty;
         }
 
         /* Tira de 3 Fotos de Peças & Etapas do Processo */
@@ -848,10 +811,10 @@
             position: absolute;
             left: 6px;
             bottom: 6px;
-            background-color: rgba(34, 27, 23, 0.78);
+            background-color: rgba(14, 38, 48, 0.78);
             backdrop-filter: blur(4px);
-            color: #FAF7F2;
-            font-size: 9.5px;
+            color: #F4F8FA;
+            font-size: 11px;
             font-weight: 700;
             padding: 2px 7px;
             border-radius: 999px;
@@ -866,12 +829,12 @@
         }
 
         .craft-pill {
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 700;
             padding: 4px 10px;
             border-radius: 999px;
-            background-color: var(--terracotta-soft);
-            color: var(--terracotta-dark);
+            background-color: var(--cobalt-tint);
+            color: var(--cobalt-deep);
         }
 
         .craft-pill.olive {
@@ -880,8 +843,8 @@
         }
 
         .craft-pill.sand {
-            background-color: #F2ECE3;
-            color: #5E524A;
+            background-color: #E7EFF3;
+            color: #3B5560;
         }
 
         /* Linha Inferior de Ação da Barraca */
@@ -900,7 +863,7 @@
             border-radius: 14px;
             padding: 11px 14px;
             font-family: var(--font-body);
-            font-size: 12px;
+            font-size: 13.5px;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -911,17 +874,17 @@
         }
 
         .btn-visit-booth:hover {
-            background-color: #D5E5EA;
+            background-color: #D2E4EA;
         }
 
         .btn-visit-booth.primary-clay {
-            background-color: var(--terracotta-primary);
+            background-color: var(--petrol-primary);
             color: #FFFFFF;
-            box-shadow: 0 6px 16px rgba(217, 93, 57, 0.24);
+            box-shadow: 0 6px 16px rgba(18, 55, 66, 0.24);
         }
 
         .btn-visit-booth.primary-clay:hover {
-            background-color: var(--terracotta-dark);
+            background-color: var(--petrol-dark);
         }
 
         .btn-booth-quick-info {
@@ -939,7 +902,7 @@
         }
 
         .btn-booth-quick-info:hover {
-            background-color: #D5E5EA;
+            background-color: #D2E4EA;
             color: var(--petrol-dark);
         }
 
@@ -958,7 +921,7 @@
             border-radius: 16px;
             padding: 13px 16px;
             font-family: var(--font-body);
-            font-size: 12.5px;
+            font-size: 14px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -999,7 +962,7 @@
 
         .masonry-artisan-pill {
             display: inline-block;
-            font-size: 9.5px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--petrol-dark);
             background-color: var(--petrol-soft);
@@ -1009,9 +972,9 @@
         }
 
         .masonry-post-caption {
-            font-size: 11.5px;
+            font-size: 13px;
             color: var(--text-primary);
-            line-height: 1.4;
+            line-height: 1.5;
         }
 
         .masonry-post-footer {
@@ -1021,7 +984,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 10.5px;
+            font-size: 12px;
             color: var(--text-secondary);
             font-weight: 600;
         }
@@ -1032,7 +995,7 @@
             border-radius: 999px;
             padding: 4px 10px;
             font-family: var(--font-body);
-            font-size: 11.5px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--text-secondary);
             display: inline-flex;
@@ -1051,31 +1014,31 @@
            ========================================================================== */
         .eyebrow-label {
             display: block;
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.08em;
-            color: var(--petrol-primary);
+            letter-spacing: 0.07em;
+            color: var(--cobalt-deep);
         }
 
         .screen-heading {
             font-family: var(--font-display);
-            font-size: 27px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
+            font-size: 24px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
             color: var(--petrol-dark);
             line-height: 1.1;
         }
 
         .screen-sub {
-            font-size: 12.5px;
+            font-size: 14px;
             color: var(--text-secondary);
             margin-top: 4px;
         }
 
         .form-card {
             background-color: var(--bg-card);
-            background-image: radial-gradient(rgba(92, 68, 52, 0.08) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(27, 77, 92, 0.08) 1px, transparent 1px);
             background-size: 24px 24px;
             border: 1.5px solid var(--border-subtle);
             border-radius: 28px;
@@ -1098,7 +1061,7 @@
         }
 
         .field-label {
-            font-size: 11.5px;
+            font-size: 13px;
             font-weight: 700;
             color: var(--text-primary);
         }
@@ -1117,30 +1080,31 @@
 
         .field-input:focus, .field-select:focus, .field-textarea:focus {
             outline: none;
-            border-color: var(--terracotta-primary);
+            border-color: var(--cobalt-glow);
             background-color: #FFFFFF;
+            box-shadow: var(--focus-ring);
         }
 
         .btn-primary-full {
             width: 100%;
-            background-color: var(--terracotta-primary);
+            background-color: var(--petrol-primary);
             color: #FFFFFF;
             border: none;
             border-radius: 16px;
             padding: 13px 16px;
             font-family: var(--font-body);
-            font-size: 13px;
+            font-size: 14.5px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: 0 8px 20px rgba(217, 93, 57, 0.24);
+            box-shadow: 0 8px 20px rgba(18, 55, 66, 0.24);
         }
 
         .btn-primary-full:hover {
-            background-color: var(--terracotta-dark);
+            background-color: var(--petrol-dark);
         }
 
         /* Painel do Gestor */
@@ -1150,7 +1114,7 @@
 
         .manager-stall-box {
             background-color: var(--bg-card);
-            background-image: radial-gradient(rgba(92, 68, 52, 0.10) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(27, 77, 92, 0.10) 1px, transparent 1px);
             background-size: 22px 22px;
             border: 1.5px solid var(--border-subtle);
             border-radius: 30px;
@@ -1191,7 +1155,7 @@
             width: 26px;
             height: 26px;
             border-radius: 50%;
-            background-color: var(--terracotta-primary);
+            background-color: var(--cobalt-deep);
             color: #FFFFFF;
             border: 2px solid #FFFFFF;
             display: flex;
@@ -1202,16 +1166,16 @@
 
         .manager-stall-name {
             font-family: var(--font-display);
-            font-size: 25px;
-            font-weight: 400;
-            letter-spacing: 0.025em;
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
             color: var(--petrol-dark);
             margin-top: 6px;
             line-height: 1.1;
         }
 
         .manager-stall-meta {
-            font-size: 11.5px;
+            font-size: 13px;
             color: var(--text-secondary);
             margin-top: 2px;
         }
@@ -1226,7 +1190,7 @@
 
         .stat-chip {
             background-color: var(--petrol-soft);
-            border: 1px solid #D3E3E8;
+            border: 1px solid var(--petrol-line);
             border-radius: 16px;
             padding: 9px 6px;
             display: flex;
@@ -1236,15 +1200,15 @@
 
         .stat-value {
             font-family: var(--font-display);
-            font-size: 22px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
             color: var(--petrol-dark);
             line-height: 1.05;
         }
 
         .stat-label {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 600;
             color: var(--text-secondary);
         }
@@ -1271,7 +1235,7 @@
             border-radius: 999px;
             padding: 8px 12px;
             font-family: var(--font-body);
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 700;
             white-space: nowrap;
             cursor: pointer;
@@ -1279,7 +1243,7 @@
 
         .mgr-tab-btn.active {
             background-color: var(--petrol-primary);
-            color: #FAF7F2;
+            color: #F4F8FA;
         }
 
         .mgr-tab-panel {
@@ -1295,13 +1259,13 @@
 
         .btn-add-step {
             width: 100%;
-            background-color: var(--terracotta-soft);
-            color: var(--terracotta-dark);
-            border: 1.5px dashed var(--terracotta-primary);
+            background-color: var(--cobalt-tint);
+            color: var(--cobalt-deep);
+            border: 1.5px dashed var(--cobalt-soft);
             border-radius: 18px;
             padding: 12px;
             font-family: var(--font-body);
-            font-size: 12.5px;
+            font-size: 14px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -1312,7 +1276,7 @@
 
         .mgr-process-item {
             background-color: var(--bg-card);
-            background-image: radial-gradient(rgba(92, 68, 52, 0.08) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(27, 77, 92, 0.08) 1px, transparent 1px);
             background-size: 20px 20px;
             border: 1.5px solid var(--border-subtle);
             border-radius: 22px;
@@ -1342,29 +1306,29 @@
         }
 
         .mgr-step-badge {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
-            color: var(--terracotta-dark);
-            background-color: var(--terracotta-soft);
+            color: var(--petrol-dark);
+            background-color: var(--petrol-soft);
             padding: 2px 8px;
             border-radius: 999px;
         }
 
         .mgr-step-time {
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--text-muted);
         }
 
         .mgr-process-title {
             font-family: var(--font-ui);
-            font-size: 14.5px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .mgr-process-desc {
-            font-size: 11.5px;
+            font-size: 13px;
             color: var(--text-secondary);
             margin-top: 2px;
             line-height: 1.4;
@@ -1383,7 +1347,7 @@
             border-radius: 999px;
             padding: 4px 10px;
             font-family: var(--font-body);
-            font-size: 10.5px;
+            font-size: 12px;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -1412,7 +1376,7 @@
             padding: 22px 16px;
             text-align: center;
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 13.5px;
         }
 
         .interaction-card {
@@ -1443,22 +1407,22 @@
         }
 
         .interaction-author {
-            font-size: 12.5px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--text-primary);
         }
 
         .interaction-piece-tag {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
-            color: var(--terracotta-dark);
-            background-color: var(--terracotta-soft);
+            color: var(--cobalt-deep);
+            background-color: var(--cobalt-tint);
             padding: 2px 7px;
             border-radius: 999px;
         }
 
         .interaction-msg {
-            font-size: 11.5px;
+            font-size: 13px;
             color: var(--text-secondary);
             margin-top: 4px;
             line-height: 1.4;
@@ -1480,7 +1444,7 @@
             border-radius: 12px;
             padding: 7px 10px;
             font-family: var(--font-body);
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 700;
             display: inline-flex;
             align-items: center;
@@ -1503,18 +1467,18 @@
             position: sticky;
             bottom: 0;
             padding: 12px clamp(14px, 4vw, 18px) calc(14px + env(safe-area-inset-bottom, 0px));
-            background: linear-gradient(180deg, rgba(250, 247, 242, 0) 0%, #FAF7F2 32%);
+            background: linear-gradient(180deg, rgba(244, 248, 250, 0) 0%, #F4F8FA 32%);
         }
 
         .btn-preview-client {
             width: 100%;
             background-color: var(--petrol-dark);
-            color: #FAF7F2;
+            color: #F4F8FA;
             border: none;
             border-radius: 16px;
             padding: 13px 16px;
             font-family: var(--font-body);
-            font-size: 12px;
+            font-size: 13.5px;
             font-weight: 700;
             display: flex;
             align-items: center;
@@ -1535,7 +1499,7 @@
             position: fixed;
             inset: 0;
             z-index: 200;
-            background-color: rgba(44, 36, 32, 0.62);
+            background-color: rgba(14, 38, 48, 0.62);
             backdrop-filter: blur(4px);
             display: none;
             align-items: flex-end;
@@ -1574,9 +1538,9 @@
 
         .modal-title {
             font-family: var(--font-display);
-            font-size: 23px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
+            font-size: 21px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
             color: var(--petrol-dark);
             line-height: 1.1;
         }
@@ -1609,7 +1573,7 @@
         }
 
         .avatar-preset-btn.selected {
-            border-color: var(--terracotta-primary);
+            border-color: var(--cobalt-glow);
         }
 
         .avatar-preset-btn img {
@@ -1636,7 +1600,7 @@
         }
 
         .step-thumb-btn.selected {
-            border-color: var(--terracotta-primary);
+            border-color: var(--cobalt-glow);
         }
 
         .step-thumb-btn img {
@@ -1652,12 +1616,12 @@
             justify-content: center;
             gap: 6px;
             background-color: var(--bg-card);
-            border: 1.5px dashed var(--terracotta-light);
+            border: 1.5px dashed var(--cobalt-soft);
             border-radius: 14px;
             padding: 10px;
-            font-size: 11.5px;
+            font-size: 13px;
             font-weight: 700;
-            color: var(--terracotta-dark);
+            color: var(--cobalt-deep);
             cursor: pointer;
             margin-bottom: 6px;
         }
@@ -1669,8 +1633,8 @@
             transform: translateX(-50%) translateY(20px);
             z-index: 2000;
             background-color: var(--petrol-dark);
-            color: #FAF7F2;
-            font-size: 12px;
+            color: #F4F8FA;
+            font-size: 13.5px;
             font-weight: 600;
             padding: 10px 18px;
             border-radius: 999px;
@@ -1697,7 +1661,7 @@
             max-height: 88dvh;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
-            box-shadow: 0 -12px 36px rgba(44, 36, 32, 0.25);
+            box-shadow: 0 -12px 36px rgba(14, 38, 48, 0.25);
             animation: sheetSlideUp 0.26s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
@@ -1718,7 +1682,7 @@
             border: 1.5px solid var(--border-subtle);
             border-radius: 999px;
             padding: 6px 11px;
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 700;
             color: var(--text-primary);
             cursor: pointer;
@@ -1726,13 +1690,13 @@
         }
 
         .fair-check-pill:has(input:checked) {
-            background-color: var(--terracotta-soft);
-            border-color: var(--terracotta-primary);
-            color: var(--terracotta-dark);
+            background-color: var(--cobalt-tint);
+            border-color: var(--cobalt-glow);
+            color: var(--cobalt-deep);
         }
 
         .fair-check-pill input {
-            accent-color: var(--terracotta-primary);
+            accent-color: var(--cobalt-glow);
             width: 13px;
             height: 13px;
             margin: 0;
@@ -1740,8 +1704,8 @@
 
         .agenda-trigger-banner {
             margin: 4px clamp(14px, 4vw, 18px) 10px;
-            background: linear-gradient(135deg, #E4EFF2 0%, #FBECE6 100%);
-            border: 1px solid #C9DCE2;
+            background: linear-gradient(135deg, var(--petrol-soft) 0%, var(--cobalt-tint) 100%);
+            border: 1px solid var(--petrol-line);
             border-radius: 22px;
             padding: 13px 14px;
             display: flex;
@@ -1752,12 +1716,12 @@
 
         .btn-open-agenda {
             background-color: var(--petrol-primary);
-            color: #FAF7F2;
+            color: #F4F8FA;
             border: none;
             border-radius: 999px;
             padding: 8px 13px;
             font-family: var(--font-body);
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 700;
             cursor: pointer;
             white-space: nowrap;
@@ -1785,7 +1749,7 @@
             border-radius: 999px;
             padding: 8px 10px;
             font-family: var(--font-body);
-            font-size: 11px;
+            font-size: 12.5px;
             font-weight: 700;
             cursor: pointer;
         }
@@ -1813,7 +1777,7 @@
         }
 
         .fair-freq-badge {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
             padding: 3px 9px;
             border-radius: 999px;
@@ -1828,15 +1792,15 @@
 
         .fair-event-title {
             font-family: var(--font-display);
-            font-size: 20px;
-            font-weight: 400;
-            letter-spacing: 0.02em;
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -0.015em;
             color: var(--petrol-dark);
             line-height: 1.15;
         }
 
         .fair-event-meta {
-            font-size: 11.5px;
+            font-size: 13px;
             color: var(--text-secondary);
             line-height: 1.45;
         }
@@ -1848,7 +1812,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            font-size: 10.5px;
+            font-size: 12px;
             color: var(--text-muted);
             font-weight: 600;
         }
@@ -1856,7 +1820,7 @@
         .fair-economics-strip {
             margin-top: 4px;
             background-color: var(--bg-cream);
-            border: 1px dashed #D6CFC3;
+            border: 1px dashed #C3DAE2;
             border-radius: 14px;
             padding: 8px 10px;
             display: flex;
@@ -1874,7 +1838,7 @@
         }
 
         .fair-econ-pill {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
             padding: 3px 8px;
             border-radius: 999px;
@@ -1890,9 +1854,9 @@
         }
 
         .fair-econ-pill.organizer {
-            background-color: var(--terracotta-soft);
-            border-color: #F2CFC1;
-            color: var(--terracotta-dark);
+            background-color: var(--cobalt-tint);
+            border-color: var(--cobalt-line);
+            color: var(--cobalt-deep);
         }
 
         .btn-edit-fair-econ {
@@ -1902,7 +1866,7 @@
             border-radius: 999px;
             padding: 4px 10px;
             font-family: var(--font-body);
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
             cursor: pointer;
             display: inline-flex;
@@ -1912,7 +1876,7 @@
         }
 
         .btn-edit-fair-econ:hover {
-            background-color: #CFE2E8;
+            background-color: #D2E4EA;
         }
 
         .fair-econ-inline-editor {
@@ -1930,7 +1894,7 @@
            ========================================================================== */
         .visual-calendar-card {
             background-color: var(--bg-card);
-            background-image: radial-gradient(rgba(92, 68, 52, 0.08) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(27, 77, 92, 0.08) 1px, transparent 1px);
             background-size: 20px 20px;
             border: 1.5px solid var(--border-subtle);
             border-radius: 24px;
@@ -1949,8 +1913,9 @@
 
         .cal-month-title {
             font-family: var(--font-display);
-            font-size: 22px;
-            letter-spacing: 0.03em;
+            font-weight: 700;
+            font-size: 18px;
+            letter-spacing: -0.015em;
             color: var(--petrol-dark);
             line-height: 1;
         }
@@ -1978,7 +1943,7 @@
         }
 
         .cal-weekday-label {
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 700;
             color: var(--text-muted);
             padding-bottom: 4px;
@@ -1990,7 +1955,7 @@
             border: 1px solid transparent;
             background-color: var(--bg-cream);
             color: var(--text-primary);
-            font-size: 11.5px;
+            font-size: 13px;
             font-weight: 700;
             display: flex;
             flex-direction: column;
@@ -2009,7 +1974,7 @@
 
         .cal-day-cell.has-fair {
             background-color: var(--petrol-soft);
-            border-color: #B7D3DC;
+            border-color: var(--petrol-line);
             color: var(--petrol-dark);
         }
 
@@ -2035,7 +2000,7 @@
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            background-color: var(--terracotta-primary);
+            background-color: var(--cobalt-glow);
         }
 
         .cal-day-cell.selected .cal-dot {
@@ -2048,11 +2013,65 @@
             align-items: center;
             justify-content: space-between;
             gap: 6px;
-            font-size: 10px;
+            font-size: 11.5px;
             font-weight: 600;
             color: var(--text-secondary);
             padding-top: 4px;
             border-top: 1px dashed var(--border-subtle);
+        }
+
+        /* ==========================================================================
+           CAMADA DE LEGIBILIDADE & ESTADOS (foco, toque, números tabulares)
+           ========================================================================== */
+        button, input, select, textarea {
+            font-family: var(--font-body);
+        }
+
+        h1, h2, h3, h4, .screen-heading, .modal-title, .booth-artisan-title,
+        .manager-stall-name, .fair-event-title {
+            text-wrap: balance;
+        }
+
+        p, .screen-sub, .booth-bio-copy, .masonry-post-caption, .mgr-process-desc,
+        .interaction-msg, .fair-event-meta {
+            text-wrap: pretty;
+        }
+
+        .stat-value, .cal-day-cell, .mgr-step-time, .fair-econ-pill, .btn-heart-like {
+            font-variant-numeric: tabular-nums;
+        }
+
+        :where(button, a, [role="button"], label.fair-check-pill, .cal-day-cell):focus-visible {
+            outline: none;
+            box-shadow: var(--focus-ring);
+        }
+
+        :where(button):not(:disabled):active {
+            transform: scale(0.98);
+        }
+
+        :where(button) {
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+                        box-shadow 0.2s ease, transform 0.15s ease;
+        }
+
+        .fair-pill-btn:not(.active):hover,
+        .mgr-tab-btn:not(.active):hover,
+        .agenda-tab-pill:not(.active):hover {
+            background-color: var(--petrol-soft);
+            color: var(--petrol-dark);
+        }
+
+        .artisanal-booth-card:hover {
+            box-shadow: 0 14px 30px rgba(18, 55, 66, 0.11);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
 
         /* ==========================================================================
@@ -2106,7 +2125,7 @@
             }
 
             .stat-label {
-                font-size: 9.5px;
+                font-size: 11px;
             }
         }
 
@@ -2303,9 +2322,9 @@
             <!-- Banner de Acesso Rápido ao Calendário & Divulgação de Feiras do RJ -->
             <div class="agenda-trigger-banner">
                 <div>
-                    <span class="eyebrow-label" style="font-size: 9.5px;">Calendário Cultural RJ</span>
-                    <strong style="font-family: var(--font-display); font-size: 18px; letter-spacing: 0.02em; color: var(--petrol-dark); display: block; line-height: 1.15;">Feiras Fixas &amp; Eventuais</strong>
-                    <span style="font-size: 11px; color: var(--text-secondary);">Veja datas ou divulgue uma nova feira</span>
+                    <span class="eyebrow-label" style="font-size: 11px;">Calendário Cultural RJ</span>
+                    <strong style="font-family: var(--font-display); font-size: 17px; font-weight: 700; letter-spacing: -0.015em; color: var(--petrol-dark); display: block; line-height: 1.15;">Feiras Fixas &amp; Eventuais</strong>
+                    <span style="font-size: 12.5px; color: var(--text-secondary);">Veja datas ou divulgue uma nova feira</span>
                 </div>
                 <button type="button" class="btn-open-agenda" onclick="openAgendaModal('list')">
                     <span>Ver Agenda</span>
@@ -2575,7 +2594,7 @@
                     <span>←</span>
                     <span>Entrada</span>
                 </button>
-                <span class="header-step-tag" style="color: var(--terracotta-dark); background-color: var(--terracotta-soft); border-color: transparent;">Área Privada do Ceramista</span>
+                <span class="header-step-tag" style="color: var(--cobalt-deep); background-color: var(--cobalt-tint); border-color: var(--cobalt-line);">Área Privada do Ceramista</span>
             </header>
 
             <div class="login-body">
@@ -2831,7 +2850,7 @@
                     <div class="cal-month-header">
                         <button type="button" class="cal-nav-btn" onclick="changeManagerCalendarMonth(-1)" aria-label="Mês anterior">‹</button>
                         <div style="text-align: center;">
-                            <span class="eyebrow-label" style="font-size: 9px;">Agenda do Feirante</span>
+                            <span class="eyebrow-label" style="font-size: 11px;">Agenda do Feirante</span>
                             <h3 id="mgr-cal-month-label" class="cal-month-title">NOVEMBRO 2026</h3>
                         </div>
                         <button type="button" class="cal-nav-btn" onclick="changeManagerCalendarMonth(1)" aria-label="Próximo mês">›</button>
@@ -2900,8 +2919,8 @@
                     </button>
 
                     <div style="margin-top: 8px; padding-top: 14px; border-top: 1px dashed var(--border-subtle); display: flex; flex-direction: column; gap: 8px;">
-                        <span style="font-size: 11px; color: var(--text-secondary);">Sua conta e suas etapas ficam salvas automaticamente na nuvem até você decidir excluir.</span>
-                        <button type="button" onclick="openDeleteAccountModal()" style="width: 100%; background-color: #FDECEA; color: #B42318; border: 1px solid #F5C2BE; border-radius: 14px; padding: 11px 14px; font-family: var(--font-body); font-size: 12px; font-weight: 700; cursor: pointer;">
+                        <span style="font-size: 12.5px; color: var(--text-secondary);">Sua conta e suas etapas ficam salvas automaticamente na nuvem até você decidir excluir.</span>
+                        <button type="button" onclick="openDeleteAccountModal()" style="width: 100%; background-color: #FDECEA; color: #B42318; border: 1px solid #F5C2BE; border-radius: 14px; padding: 11px 14px; font-family: var(--font-body); font-size: 13.5px; font-weight: 700; cursor: pointer;">
                             🗑️ Apagar minha conta e barraquinha
                         </button>
                     </div>
@@ -3068,7 +3087,7 @@
             <div class="mobile-modal-sheet">
                 <div class="modal-header">
                     <div>
-                        <span class="eyebrow-label" style="font-size: 9.5px;">Rio de Janeiro • Artesanato &amp; Cerâmica</span>
+                        <span class="eyebrow-label" style="font-size: 11px;">Rio de Janeiro • Artesanato &amp; Cerâmica</span>
                         <h3 class="modal-title">Calendário de Feiras RJ</h3>
                     </div>
                     <button type="button" class="btn-modal-close" onclick="closeAgendaModal()">✕</button>
@@ -3083,9 +3102,9 @@
                 <!-- MODO 1: LISTA COM FILTRO (TODAS / SEMPRE OCORREM / EVENTUAIS) -->
                 <div id="agenda-list-view" style="display: flex; flex-direction: column; gap: 10px;">
                     <div style="display: flex; gap: 6px;">
-                        <button type="button" class="fair-pill-btn active" style="padding: 6px 11px; font-size: 11px;" onclick="filterAgendaEvents(this, 'all')">Todas</button>
-                        <button type="button" class="fair-pill-btn" style="padding: 6px 11px; font-size: 11px;" onclick="filterAgendaEvents(this, 'sempre')">Sempre ocorrem</button>
-                        <button type="button" class="fair-pill-btn" style="padding: 6px 11px; font-size: 11px;" onclick="filterAgendaEvents(this, 'eventual')">Eventuais</button>
+                        <button type="button" class="fair-pill-btn active" style="padding: 6px 11px; font-size: 12.5px;" onclick="filterAgendaEvents(this, 'all')">Todas</button>
+                        <button type="button" class="fair-pill-btn" style="padding: 6px 11px; font-size: 12.5px;" onclick="filterAgendaEvents(this, 'sempre')">Sempre ocorrem</button>
+                        <button type="button" class="fair-pill-btn" style="padding: 6px 11px; font-size: 12.5px;" onclick="filterAgendaEvents(this, 'eventual')">Eventuais</button>
                     </div>
                     <div id="rj-fairs-events-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
                 </div>
@@ -3117,7 +3136,7 @@
                     </div>
 
                     <div id="publish-fair-artisan-only-fields" style="display: none; flex-direction: column; gap: 11px; background-color: var(--petrol-soft); padding: 12px; border-radius: 16px; border: 1px solid #C6DCE2;">
-                        <span class="eyebrow-label" style="font-size: 9.5px;">🔒 Dados Financeiros (Visível só para Artesãos)</span>
+                        <span class="eyebrow-label" style="font-size: 11px;">🔒 Dados Financeiros (Visível só para Artesãos)</span>
                         <div class="field-group">
                             <label for="fair-ev-fee" class="field-label">Taxa de inscrição / bancada</label>
                             <input type="text" id="fair-ev-fee" class="field-input" placeholder="Ex: R$ 120,00 por dia ou Gratuita">
@@ -3164,7 +3183,7 @@
                 </p>
                 <div style="display: flex; gap: 8px; margin-top: 6px;">
                     <button type="button" class="btn-nav-pill" style="flex: 1; justify-content: center; padding: 12px;" onclick="closeDeleteAccountModal()">Cancelar</button>
-                    <button type="button" onclick="confirmDeleteCurrentArtisanAccount()" style="flex: 1; background-color: #B42318; color: #FFFFFF; border: none; border-radius: 999px; padding: 12px; font-family: var(--font-body); font-size: 12px; font-weight: 700; cursor: pointer;">Sim, apagar conta</button>
+                    <button type="button" onclick="confirmDeleteCurrentArtisanAccount()" style="flex: 1; background-color: #B42318; color: #FFFFFF; border: none; border-radius: 999px; padding: 12px; font-family: var(--font-body); font-size: 13.5px; font-weight: 700; cursor: pointer;">Sim, apagar conta</button>
                 </div>
             </div>
         </div>
@@ -3573,7 +3592,7 @@
             const input = document.getElementById(inputId);
             if (!input) return;
             input.type = input.type === 'password' ? 'text' : 'password';
-            btn.style.color = input.type === 'text' ? 'var(--terracotta-primary)' : 'var(--text-secondary)';
+            btn.style.color = input.type === 'text' ? 'var(--cobalt-glow)' : 'var(--text-secondary)';
         }
 
         function handleArtisanLogin(event) {
@@ -3862,7 +3881,7 @@
                         <span class="fair-freq-badge ${ev.frequency === 'eventual' ? 'eventual' : ''}">
                             ${ev.frequency === 'sempre' ? '🔄 Sempre ocorre (Fixa)' : '✨ Eventual / Especial'}
                         </span>
-                        <span style="font-size: 10.5px; font-weight: 700; color: var(--petrol-primary);">${escapeHtml(ev.schedule)}</span>
+                        <span style="font-size: 12px; font-weight: 700; color: var(--petrol-primary);">${escapeHtml(ev.schedule)}</span>
                     </div>
                     <h4 class="fair-event-title">${escapeHtml(ev.title)}</h4>
                     <p class="fair-event-meta">${escapeHtml(ev.desc)}</p>
@@ -3998,7 +4017,7 @@
                         <span class="fair-freq-badge ${ev.frequency === 'eventual' ? 'eventual' : ''}">
                             ${ev.frequency === 'sempre' ? '🔄 Fixa' : '✨ Eventual'}
                         </span>
-                        <span style="font-size: 10.5px; font-weight: 700; color: var(--petrol-primary);">${escapeHtml(ev.schedule)}</span>
+                        <span style="font-size: 12px; font-weight: 700; color: var(--petrol-primary);">${escapeHtml(ev.schedule)}</span>
                     </div>
                     <h4 class="fair-event-title">${escapeHtml(ev.title)}</h4>
                     <p class="fair-event-meta">${escapeHtml(ev.desc)}</p>
@@ -4017,20 +4036,20 @@
                     ${isEditing ? `
                     <form class="fair-econ-inline-editor" onsubmit="saveInlineFairEconomics(event, '${ev.id}')">
                         <div class="field-group">
-                            <label class="field-label" style="font-size: 10.5px;">Taxa de inscrição / barraca</label>
-                            <input type="text" id="edit-fee-${ev.id}" class="field-input" style="min-height: 36px; padding: 6px 10px; font-size: 13px;" value="${escapeHtml(feeLabel)}" required>
+                            <label class="field-label" style="font-size: 12px;">Taxa de inscrição / barraca</label>
+                            <input type="text" id="edit-fee-${ev.id}" class="field-input" style="min-height: 36px; padding: 6px 10px; font-size: 14.5px;" value="${escapeHtml(feeLabel)}" required>
                         </div>
                         <div class="field-row-2">
                             <div class="field-group">
-                                <label class="field-label" style="font-size: 10.5px;">% Feirante</label>
-                                <input type="number" id="edit-art-${ev.id}" class="field-input" style="min-height: 36px; padding: 6px 10px; font-size: 13px;" min="0" max="100" value="${artShare}" oninput="syncFairSplitPercentages('artisan', 'edit-${ev.id}')" required>
+                                <label class="field-label" style="font-size: 12px;">% Feirante</label>
+                                <input type="number" id="edit-art-${ev.id}" class="field-input" style="min-height: 36px; padding: 6px 10px; font-size: 14.5px;" min="0" max="100" value="${artShare}" oninput="syncFairSplitPercentages('artisan', 'edit-${ev.id}')" required>
                             </div>
                             <div class="field-group">
-                                <label class="field-label" style="font-size: 10.5px;">% Feira</label>
-                                <input type="number" id="edit-fair-${ev.id}" class="field-input" style="min-height: 36px; padding: 6px 10px; font-size: 13px;" min="0" max="100" value="${orgShare}" oninput="syncFairSplitPercentages('fair', 'edit-${ev.id}')" required>
+                                <label class="field-label" style="font-size: 12px;">% Feira</label>
+                                <input type="number" id="edit-fair-${ev.id}" class="field-input" style="min-height: 36px; padding: 6px 10px; font-size: 14.5px;" min="0" max="100" value="${orgShare}" oninput="syncFairSplitPercentages('fair', 'edit-${ev.id}')" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn-primary-full" style="padding: 9px 12px; font-size: 11.5px;">Salvar taxa e porcentagens</button>
+                        <button type="submit" class="btn-primary-full" style="padding: 9px 12px; font-size: 13px;">Salvar taxa e porcentagens</button>
                     </form>
                     ` : ''}
 
@@ -4456,11 +4475,11 @@
                         <img src="${st.img}" alt="${escapeHtml(st.title)}" style="width: 64px; height: 64px; border-radius: 12px; object-fit: cover; flex-shrink: 0;">
                         <div style="flex: 1;">
                             <div style="display: flex; justify-content: space-between; align-items: center; gap: 6px;">
-                                <span style="font-size: 10px; font-weight: 700; color: var(--terracotta-dark); background: var(--terracotta-soft); padding: 2px 8px; border-radius: 999px;">Etapa 0${idx + 1}</span>
-                                <span style="font-size: 10.5px; font-weight: 600; color: var(--text-muted);">${escapeHtml(st.time)}</span>
+                                <span style="font-size: 11.5px; font-weight: 700; color: var(--petrol-dark); background: var(--petrol-soft); padding: 2px 8px; border-radius: 999px;">Etapa 0${idx + 1}</span>
+                                <span style="font-size: 12px; font-weight: 600; color: var(--text-muted);">${escapeHtml(st.time)}</span>
                             </div>
-                            <h4 style="font-family: var(--font-ui); font-size: 14px; font-weight: 700; color: var(--text-primary); margin-top: 3px;">${escapeHtml(st.title)}</h4>
-                            <p style="font-size: 11.5px; color: var(--text-secondary); margin-top: 2px; line-height: 1.4;">${escapeHtml(st.desc)}</p>
+                            <h4 style="font-family: var(--font-ui); font-size: 15px; font-weight: 700; color: var(--text-primary); margin-top: 3px;">${escapeHtml(st.title)}</h4>
+                            <p style="font-size: 13px; color: var(--text-secondary); margin-top: 2px; line-height: 1.4;">${escapeHtml(st.desc)}</p>
                         </div>
                     </div>
                 `).join('')
@@ -4473,7 +4492,7 @@
                         <img src="${art.avatar}" alt="${escapeHtml(art.name)}" style="width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFFFF;">
                         <div>
                             <h3 class="modal-title">${escapeHtml(art.name)}</h3>
-                            <span style="font-size: 11px; font-weight: 600; color: var(--text-secondary);">${escapeHtml(art.owner)} • ${escapeHtml(art.years)}</span>
+                            <span style="font-size: 12.5px; font-weight: 600; color: var(--text-secondary);">${escapeHtml(art.owner)} • ${escapeHtml(art.years)}</span>
                         </div>
                     </div>
                     <button type="button" class="btn-modal-close" onclick="closeArtisanDrawer()">✕</button>
@@ -4481,7 +4500,7 @@
                 <div style="display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0;">
                     ${art.fairs.map(f => `<span class="craft-pill olive">📍 ${escapeHtml(f)}</span>`).join('')}
                 </div>
-                <p style="font-size: 12.5px; color: var(--text-primary); line-height: 1.5; margin-bottom: 14px;">${escapeHtml(art.bio)}</p>
+                <p style="font-size: 14px; color: var(--text-primary); line-height: 1.5; margin-bottom: 14px;">${escapeHtml(art.bio)}</p>
                 <span class="eyebrow-label" style="margin-bottom: 8px;">Caderno de Processos (${art.steps.length})</span>
                 <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 14px;">
                     ${stepsHtml}
