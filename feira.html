@@ -6,7 +6,7 @@
     <title>Feira Virtual de Processos — Barro &amp; Mão</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Fraunces:opsz,wght@9..144,600;9..144,700;9..144,800&display=swap" rel="stylesheet">
     
     <style id="core-styles">
         /* ==========================================================================
@@ -14,10 +14,10 @@
            ========================================================================== */
         :root {
             /* Neutros frios levemente azulados (uma única família de cinza) */
-            --bg-canvas: #D8E3E9;
-            --bg-cream: #F4F8FA;
-            --bg-sand: #E7EFF3;
-            --bg-card: #FFFFFF;
+            --bg-canvas: #D9D2C4;
+            --bg-cream: #F4EFE6;
+            --bg-sand: #E9E1D3;
+            --bg-card: #FBF8F2;
 
             /* Azul petróleo — cor principal de marca, botões e títulos */
             --petrol-primary: #1B4D5C;
@@ -46,14 +46,25 @@
             --text-primary: #14262D;
             --text-secondary: #455760;
             --text-muted: #5E6F77;
-            --border-subtle: #D3E0E6;
+            --border-subtle: #DCD2C1;
             --success-green: #23694B;
             --success-soft: #E3F3EB;
 
             --focus-ring: 0 0 0 3px rgba(58, 100, 232, 0.35);
 
-            --font-display: 'Bricolage Grotesque', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
-            --font-ui: 'Bricolage Grotesque', 'Atkinson Hyperlegible Next', system-ui, sans-serif;
+            /* Colagem: papel, céu listrado e fita adesiva */
+            --paper: #F4EFE6;
+            --paper-card: #FBF8F2;
+            --paper-deep: #E9E1D3;
+            --sky: #BCD0E6;
+            --sky-soft: #DCE6F2;
+            --pin-red: #B3242B;
+            --tape: rgba(220, 230, 242, 0.78);
+            --paper-texture: url('assets/papel-amassado.jpg');
+            --cut-shadow: 1px 2px 0 rgba(18, 55, 66, 0.10), 0 8px 18px rgba(18, 55, 66, 0.10);
+
+            --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+            --font-ui: 'Atkinson Hyperlegible Next', system-ui, sans-serif;
             --font-body: 'Atkinson Hyperlegible Next', system-ui, -apple-system, 'Segoe UI', sans-serif;
         }
 
@@ -2075,6 +2086,706 @@
         }
 
         /* ==========================================================================
+           ESTÉTICA DE COLAGEM — papel amassado, toldo listrado, fita, tachinha,
+           selos picotados, etiquetas recortadas e bordas rasgadas
+           ========================================================================== */
+        body {
+            background-color: var(--bg-canvas);
+        }
+
+        #app-frame {
+            background-color: var(--paper);
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+            border-color: var(--paper-card);
+        }
+
+        /* Títulos serifados com personalidade, legíveis */
+        .welcome-title, .screen-heading, .modal-title, .booth-artisan-title,
+        .manager-stall-name, .fair-event-title, .cal-month-title, .stat-value {
+            font-family: var(--font-display);
+            font-variation-settings: "SOFT" 50, "WONK" 0;
+            letter-spacing: -0.01em;
+        }
+
+        .heading-tag {
+            display: inline-block;
+            vertical-align: middle;
+            margin-left: 6px;
+            font-family: var(--font-body);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0;
+            color: var(--petrol-dark);
+            background-color: var(--paper-card);
+            border: 1.5px solid currentColor;
+            border-radius: 999px;
+            padding: 1px 10px;
+            transform: rotate(-4deg) translateY(-2px);
+        }
+
+        /* Fita adesiva reutilizável */
+        .taped {
+            position: relative;
+        }
+
+        .taped::before {
+            content: '';
+            position: absolute;
+            top: -11px;
+            left: 50%;
+            width: 74px;
+            height: 22px;
+            transform: translateX(-50%) rotate(-3deg);
+            background: var(--tape);
+            box-shadow: 0 1px 2px rgba(18, 55, 66, 0.12);
+            clip-path: polygon(3% 0, 97% 4%, 100% 30%, 96% 55%, 100% 100%, 2% 96%, 0 62%, 4% 38%);
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        /* ---------- Tela de entrada: toldo listrado + papel rasgado ---------- */
+        .welcome-screen {
+            background:
+                repeating-linear-gradient(90deg, #F7F3EA 0 26px, var(--sky) 26px 52px);
+            gap: 12px;
+            padding-bottom: 0;
+        }
+
+        .welcome-blur-rings {
+            display: none;
+        }
+
+        .welcome-top-pill {
+            background-color: var(--paper-card);
+            border: none;
+            border-radius: 4px;
+            box-shadow: var(--cut-shadow);
+            transform: rotate(-1.5deg);
+            margin-top: 8px;
+            padding: 8px 14px;
+            backdrop-filter: none;
+        }
+
+        .welcome-center {
+            position: relative;
+            margin: 6px 0 0;
+        }
+
+        .welcome-stall-card {
+            border-radius: 6px;
+            border: none;
+            background-color: #FFFFFF;
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+            padding: 10px 10px 18px;
+            box-shadow: var(--cut-shadow);
+            transform: rotate(-3deg);
+        }
+
+        .welcome-stall-card::after {
+            content: '';
+            position: absolute;
+            right: -14px;
+            bottom: -10px;
+            width: 40px;
+            height: 48px;
+            background: url('assets/tachinha.png') center / contain no-repeat;
+            transform: rotate(8deg);
+            filter: drop-shadow(1px 3px 2px rgba(18, 55, 66, 0.25));
+        }
+
+        .welcome-speech {
+            position: absolute;
+            top: -8px;
+            left: max(0px, calc(50% - 205px));
+            width: 132px;
+            height: 98px;
+            background: url('assets/balao-fala.png') center / contain no-repeat;
+            filter: drop-shadow(1px 3px 3px rgba(18, 55, 66, 0.18));
+            transform: rotate(-6deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px 18px 16px;
+            z-index: 4;
+        }
+
+        .welcome-speech span {
+            font-family: var(--font-display);
+            font-size: 13.5px;
+            font-weight: 700;
+            line-height: 1.15;
+            color: var(--petrol-dark);
+            text-align: center;
+        }
+
+        .welcome-title {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            line-height: 1;
+            margin-top: 4px;
+        }
+
+        .welcome-title .title-paper {
+            background-color: var(--paper-card);
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+            color: var(--petrol-dark);
+            padding: 8px 16px 10px;
+            box-shadow: var(--cut-shadow);
+            transform: rotate(-1.5deg);
+            clip-path: polygon(0 4%, 6% 0, 40% 3%, 72% 0, 100% 5%, 98% 52%, 100% 96%, 64% 100%, 30% 97%, 2% 100%, 1% 48%);
+        }
+
+        .welcome-title .title-cut {
+            background-color: var(--petrol-primary);
+            color: #FFFFFF;
+            padding: 8px 18px 11px;
+            transform: rotate(2deg);
+            box-shadow: var(--cut-shadow);
+            clip-path: polygon(2% 6%, 30% 0, 66% 4%, 98% 0, 100% 46%, 97% 100%, 58% 95%, 22% 100%, 0 94%, 3% 50%);
+        }
+
+        .welcome-subtitle {
+            background-color: rgba(251, 248, 242, 0.95);
+            color: var(--text-primary);
+            padding: 10px 14px;
+            border-radius: 4px;
+            box-shadow: var(--cut-shadow);
+            transform: rotate(0.6deg);
+            margin-top: 14px;
+        }
+
+        .cute-clay-chip {
+            background-color: var(--paper-card);
+            border: none;
+            border-radius: 3px;
+            box-shadow: var(--cut-shadow);
+            padding: 5px 10px;
+        }
+
+        .cute-clay-chip:nth-child(1) { transform: rotate(-3deg); }
+        .cute-clay-chip:nth-child(2) { transform: rotate(2deg); background-color: var(--sky-soft); }
+        .cute-clay-chip:nth-child(3) { transform: rotate(-1.5deg); }
+
+        .welcome-actions {
+            position: relative;
+            width: calc(100% + 2 * clamp(16px, 5vw, 24px));
+            margin: 14px calc(-1 * clamp(16px, 5vw, 24px)) 0;
+            padding: 22px clamp(16px, 5vw, 24px) calc(24px + env(safe-area-inset-bottom, 0px));
+            background-color: var(--paper);
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+        }
+
+        .welcome-actions::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -17px;
+            height: 18px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 18' preserveAspectRatio='none'%3E%3Cpath d='M0 18 L0.0 5.6 L9.9 7.1 L20.3 9.9 L25.9 3.1 L38.5 5.9 L45.6 14.0 L54.8 12.2 L64.1 10.0 L70.4 10.0 L83.3 8.8 L94.9 10.4 L100.5 11.3 L110.8 6.3 L116.1 12.5 L125.4 10.9 L138.3 10.9 L151.6 7.3 L163.8 7.9 L177.2 12.7 L183.1 4.5 L190.0 13.6 L198.9 9.9 L206.7 8.6 L215.1 6.9 L225.4 9.4 L238.5 10.5 L251.9 12.4 L265.8 10.4 L272.3 12.5 L286.0 13.0 L296.1 10.9 L303.0 12.1 L313.1 6.1 L318.7 12.4 L332.6 4.0 L344.8 7.5 L351.2 6.2 L363.1 12.6 L368.5 9.8 L373.9 10.9 L381.9 12.7 L395.7 8.6 L409.7 6.4 L415.4 9.6 L420.0 5.2 L420 18 Z' fill='%23F4EFE6'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+        }
+
+        .btn-role-primary,
+        .btn-role-secondary {
+            border-radius: 999px;
+            padding: 12px 18px 12px 12px;
+        }
+
+        .btn-role-secondary {
+            background-color: var(--sky-soft);
+            border: none;
+            box-shadow: none;
+        }
+
+        .btn-role-secondary:hover {
+            background-color: var(--sky);
+        }
+
+        .role-icon-box {
+            border-radius: 50%;
+        }
+
+        .role-icon-box.on-white {
+            background-color: #FFFFFF;
+        }
+
+        /* ---------- Cabeçalho e filtros ---------- */
+        .internal-header {
+            background-color: rgba(244, 239, 230, 0.96);
+            border-bottom: 1.5px dashed var(--border-subtle);
+        }
+
+        .btn-nav-pill {
+            background-color: var(--paper-card);
+            box-shadow: inset 0 0 0 1.5px var(--border-subtle);
+        }
+
+        .header-step-tag {
+            border-radius: 3px;
+            transform: rotate(-1.5deg);
+            background-color: var(--sky-soft);
+            border-color: transparent;
+            box-shadow: var(--cut-shadow);
+        }
+
+        .fair-pill-btn {
+            background-color: transparent;
+            border: 1.5px solid var(--petrol-primary);
+            color: var(--petrol-dark);
+        }
+
+        .fair-pill-btn.active {
+            background-color: var(--petrol-primary);
+            color: #FFFFFF;
+        }
+
+        /* Selo picotado (borda de selo postal) */
+        .agenda-trigger-banner,
+        .security-note-box,
+        .login-stall-banner {
+            background: #FFFFFF;
+            border: 7px dotted var(--paper);
+            border-radius: 2px;
+            box-shadow: 0 0 0 1px rgba(18, 55, 66, 0.05);
+            outline: 1.5px dashed var(--petrol-line);
+            outline-offset: -14px;
+            padding: 16px 18px;
+        }
+
+        .agenda-trigger-banner {
+            transform: rotate(-0.8deg);
+            margin-top: 10px;
+            margin-bottom: 14px;
+        }
+
+        .security-note-box {
+            transform: rotate(0.6deg);
+            align-items: center;
+        }
+
+        .note-exclaim {
+            width: 20px;
+            height: auto;
+            flex-shrink: 0;
+            transform: rotate(8deg);
+            filter: drop-shadow(1px 2px 1px rgba(18, 55, 66, 0.2));
+        }
+
+        .btn-open-agenda {
+            border-radius: 999px;
+        }
+
+        /* ---------- Cards de barraca como papel recortado ---------- */
+        .artisanal-booths-feed {
+            gap: 22px;
+            padding-top: 4px;
+        }
+
+        .artisanal-booth-card {
+            position: relative;
+            background-color: var(--paper-card);
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+            border: none;
+            border-radius: 6px;
+            overflow: visible;
+            box-shadow: var(--cut-shadow);
+        }
+
+        .artisanal-booth-card:nth-child(odd) { transform: rotate(-0.5deg); }
+        .artisanal-booth-card:nth-child(even) { transform: rotate(0.5deg); }
+
+        .artisanal-booth-card:hover {
+            box-shadow: 1px 2px 0 rgba(18, 55, 66, 0.12), 0 14px 26px rgba(18, 55, 66, 0.14);
+        }
+
+        .booth-awning-header {
+            border-radius: 6px 6px 0 0;
+        }
+
+        .booth-awning-header::after {
+            background-image: radial-gradient(circle at 12px 0, transparent 11px, var(--paper-card) 12px);
+        }
+
+        .booth-awning-header.theme-sky {
+            background: repeating-linear-gradient(
+                90deg,
+                #8FB0DA 0px,
+                #8FB0DA 24px,
+                #F4F8FA 24px,
+                #F4F8FA 48px
+            );
+        }
+
+        .awning-loc-pill,
+        .awning-status-pill {
+            border-radius: 3px;
+        }
+
+        .awning-loc-pill { transform: rotate(-1.5deg); }
+        .awning-status-pill { transform: rotate(1.5deg); }
+
+        .booth-avatar-img {
+            border-radius: 50%;
+            border: 3px solid #FFFFFF;
+        }
+
+        /* Fotos como polaroides presas com fita */
+        .booth-triptych-grid {
+            gap: 10px;
+            margin-top: 14px;
+            padding: 4px 2px;
+        }
+
+        .triptych-item {
+            background-color: #FFFFFF;
+            border-radius: 2px;
+            padding: 4px 4px 20px;
+            aspect-ratio: auto;
+            overflow: visible;
+            box-shadow: var(--cut-shadow);
+        }
+
+        .triptych-item img {
+            aspect-ratio: 1 / 1;
+            border-radius: 1px;
+            background-color: var(--paper-deep);
+        }
+
+        .triptych-item:nth-child(1) { transform: rotate(-2.5deg); }
+        .triptych-item:nth-child(2) { transform: rotate(1.5deg) translateY(3px); }
+        .triptych-item:nth-child(3) { transform: rotate(-1deg); }
+
+        .triptych-item:nth-child(2)::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            width: 44px;
+            height: 15px;
+            transform: translateX(-50%) rotate(-4deg);
+            background: var(--tape);
+            box-shadow: 0 1px 2px rgba(18, 55, 66, 0.12);
+            z-index: 2;
+        }
+
+        .triptych-item:nth-child(1)::before {
+            content: '';
+            position: absolute;
+            top: -12px;
+            left: -6px;
+            width: 22px;
+            height: 26px;
+            background: url('assets/tachinha.png') center / contain no-repeat;
+            transform: rotate(-18deg);
+            filter: drop-shadow(1px 2px 1px rgba(18, 55, 66, 0.25));
+            z-index: 2;
+        }
+
+        /* Etiqueta de preço com furinho */
+        .triptych-pill.price-tag {
+            left: 50%;
+            bottom: 2px;
+            transform: translateX(-50%);
+            background: none;
+            backdrop-filter: none;
+            color: var(--petrol-dark);
+            font-family: var(--font-display);
+            font-size: 13.5px;
+            font-weight: 700;
+            padding: 0;
+            white-space: nowrap;
+        }
+
+        /* Tags como adesivos recortados */
+        .booth-tags-wrap {
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .craft-pill {
+            border-radius: 3px;
+            padding: 5px 10px;
+            box-shadow: 1px 1px 0 rgba(18, 55, 66, 0.10);
+        }
+
+        .craft-pill:nth-child(odd) { transform: rotate(-1.5deg); }
+        .craft-pill:nth-child(even) { transform: rotate(1.2deg); }
+
+        .craft-pill.sand {
+            background-color: var(--paper-card);
+            color: var(--petrol-dark);
+            box-shadow: inset 0 0 0 1.5px var(--petrol-line);
+        }
+
+        .btn-visit-booth,
+        .btn-primary-full,
+        .btn-open-share-modal,
+        .btn-preview-client,
+        .btn-add-step {
+            border-radius: 999px;
+        }
+
+        .btn-visit-booth {
+            background-color: var(--sky-soft);
+        }
+
+        .btn-visit-booth:hover {
+            background-color: var(--sky);
+        }
+
+        .btn-booth-quick-info {
+            border-radius: 50%;
+            background-color: var(--paper-card);
+            box-shadow: inset 0 0 0 1.5px var(--petrol-line);
+        }
+
+        .btn-booth-fav.liked {
+            background-color: #FBE7E5;
+            border-color: var(--pin-red);
+            color: var(--pin-red);
+        }
+
+        /* ---------- Mural: bloco azul com borda rasgada e polaroides ---------- */
+        .mural-wrapper {
+            position: relative;
+            margin-top: 18px;
+            background-color: var(--petrol-primary);
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+            border-radius: 0;
+            border-top: none;
+        }
+
+        .mural-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -17px;
+            height: 18px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 18' preserveAspectRatio='none'%3E%3Cpath d='M0 18 L0.0 8.0 L10.0 13.2 L19.2 8.6 L29.5 5.0 L39.1 9.9 L51.3 4.0 L59.0 4.0 L71.3 10.6 L76.7 13.8 L90.3 10.2 L100.9 4.7 L106.0 8.8 L111.5 5.1 L118.7 3.3 L127.9 7.8 L140.5 8.7 L151.2 8.5 L162.2 8.0 L169.7 14.0 L183.7 12.2 L195.0 6.5 L202.1 6.2 L207.7 11.4 L216.3 12.3 L224.8 13.5 L237.4 3.0 L244.3 13.0 L253.6 13.8 L262.1 3.8 L272.8 11.6 L280.2 4.0 L288.2 13.6 L300.1 4.3 L307.3 4.1 L312.8 11.8 L319.4 9.2 L328.4 5.1 L340.0 4.4 L350.8 4.3 L359.6 5.3 L367.0 13.7 L379.3 6.3 L392.2 5.3 L400.8 12.4 L411.5 4.1 L420.0 5.3 L420 18 Z' fill='%231B4D5C'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+        }
+
+        .mural-wrapper .eyebrow-label {
+            color: var(--sky);
+        }
+
+        .mural-wrapper .screen-heading {
+            color: #FFFFFF;
+        }
+
+        .mural-wrapper .heading-tag {
+            color: var(--petrol-dark);
+            background-color: var(--sky);
+            border-color: var(--sky);
+        }
+
+        .mural-wrapper .screen-sub {
+            color: #D7E6EC;
+        }
+
+        .btn-open-share-modal {
+            background-color: var(--sky);
+            color: var(--petrol-dark);
+            box-shadow: none;
+        }
+
+        .btn-open-share-modal:hover {
+            background-color: #FFFFFF;
+        }
+
+        .masonry-wall {
+            column-gap: 14px;
+        }
+
+        .masonry-post-card {
+            position: relative;
+            border: none;
+            border-radius: 2px;
+            background-color: #FFFFFF;
+            padding: 6px 6px 0;
+            margin-bottom: 18px;
+            overflow: visible;
+            box-shadow: 1px 3px 0 rgba(0, 0, 0, 0.12), 0 10px 20px rgba(0, 0, 0, 0.18);
+        }
+
+        .masonry-post-card:nth-child(4n+1) { transform: rotate(-1.8deg); }
+        .masonry-post-card:nth-child(4n+2) { transform: rotate(1.4deg); }
+        .masonry-post-card:nth-child(4n+3) { transform: rotate(1deg); }
+        .masonry-post-card:nth-child(4n) { transform: rotate(-1.2deg); }
+
+        .masonry-post-card::before {
+            content: '';
+            position: absolute;
+            top: -9px;
+            left: 50%;
+            width: 54px;
+            height: 17px;
+            transform: translateX(-50%) rotate(3deg);
+            background: var(--tape);
+            box-shadow: 0 1px 2px rgba(18, 55, 66, 0.15);
+            z-index: 2;
+        }
+
+        .masonry-post-img {
+            border-radius: 1px;
+        }
+
+        .masonry-artisan-pill {
+            border-radius: 3px;
+            background-color: var(--sky-soft);
+        }
+
+        .masonry-post-caption {
+            font-style: italic;
+        }
+
+        .btn-heart-like.liked {
+            background-color: #FBE7E5;
+            color: var(--pin-red);
+        }
+
+        /* ---------- Formulários: caderno espiral e papel quadriculado ---------- */
+        .form-card {
+            background-color: #FFFFFF;
+            background-image:
+                linear-gradient(rgba(27, 77, 92, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(27, 77, 92, 0.07) 1px, transparent 1px);
+            background-size: 22px 22px;
+            border: none;
+            border-radius: 6px;
+            box-shadow: var(--cut-shadow);
+        }
+
+        .notebook-card {
+            position: relative;
+            padding-left: 40px;
+        }
+
+        .notebook-card::before {
+            content: '';
+            position: absolute;
+            top: 14px;
+            bottom: 14px;
+            left: -8px;
+            width: 30px;
+            background:
+                radial-gradient(circle at 21px 50%, var(--paper) 0 5px, transparent 5.5px) 0 0 / 30px 26px repeat-y,
+                linear-gradient(transparent 0 9px, #9AA9B0 9px 12px, transparent 12px) 0 0 / 22px 26px repeat-y;
+            pointer-events: none;
+        }
+
+        .field-input, .field-select, .field-textarea {
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1.5px solid var(--border-subtle);
+            border-radius: 10px;
+        }
+
+        /* ---------- Painel do gestor ---------- */
+        .manager-stall-box {
+            position: relative;
+            background-color: #FFFFFF;
+            background-image:
+                linear-gradient(rgba(27, 77, 92, 0.07) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(27, 77, 92, 0.07) 1px, transparent 1px);
+            background-size: 22px 22px;
+            border: none;
+            border-radius: 6px;
+            box-shadow: var(--cut-shadow);
+            transform: rotate(-0.6deg);
+        }
+
+        .manager-stall-box::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 18px;
+            width: 70px;
+            height: 22px;
+            transform: rotate(-8deg);
+            background: var(--tape);
+            box-shadow: 0 1px 2px rgba(18, 55, 66, 0.12);
+        }
+
+        .stat-chip {
+            background-color: var(--sky-soft);
+            border: none;
+            border-radius: 3px;
+            box-shadow: 1px 1px 0 rgba(18, 55, 66, 0.10);
+        }
+
+        .stat-chip:nth-child(1) { transform: rotate(-2deg); }
+        .stat-chip:nth-child(2) { transform: rotate(1.5deg); }
+        .stat-chip:nth-child(3) { transform: rotate(-1deg); }
+
+        .mgr-tab-btn {
+            background-color: transparent;
+            box-shadow: inset 0 0 0 1.5px var(--petrol-line);
+            color: var(--petrol-dark);
+        }
+
+        .mgr-process-item,
+        .interaction-card,
+        .fair-event-card,
+        .visual-calendar-card {
+            background-color: var(--paper-card);
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+            border: none;
+            border-radius: 6px;
+            box-shadow: var(--cut-shadow);
+        }
+
+        .mgr-process-thumb,
+        .interaction-photo {
+            border-radius: 2px;
+            border: 3px solid #FFFFFF;
+            box-shadow: 1px 2px 0 rgba(18, 55, 66, 0.12);
+            transform: rotate(-2deg);
+        }
+
+        .manager-bottom-bar {
+            background: linear-gradient(180deg, rgba(244, 239, 230, 0) 0%, var(--paper) 32%);
+        }
+
+        /* ---------- Modais: folha de papel rasgada ---------- */
+        .mobile-modal-sheet,
+        .profile-drawer-sheet {
+            position: relative;
+            overflow-x: visible;
+            border-radius: 0;
+            background-color: var(--paper);
+            background-image: var(--paper-texture);
+            background-size: 520px auto;
+            background-blend-mode: multiply;
+            -webkit-mask:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 18' preserveAspectRatio='none'%3E%3Cpath d='M0 18 L0.0 5.6 L9.9 7.1 L20.3 9.9 L25.9 3.1 L38.5 5.9 L45.6 14.0 L54.8 12.2 L64.1 10.0 L70.4 10.0 L83.3 8.8 L94.9 10.4 L100.5 11.3 L110.8 6.3 L116.1 12.5 L125.4 10.9 L138.3 10.9 L151.6 7.3 L163.8 7.9 L177.2 12.7 L183.1 4.5 L190.0 13.6 L198.9 9.9 L206.7 8.6 L215.1 6.9 L225.4 9.4 L238.5 10.5 L251.9 12.4 L265.8 10.4 L272.3 12.5 L286.0 13.0 L296.1 10.9 L303.0 12.1 L313.1 6.1 L318.7 12.4 L332.6 4.0 L344.8 7.5 L351.2 6.2 L363.1 12.6 L368.5 9.8 L373.9 10.9 L381.9 12.7 L395.7 8.6 L409.7 6.4 L415.4 9.6 L420.0 5.2 L420 18 Z' fill='%23F4EFE6'/%3E%3C/svg%3E") top / 100% 18px no-repeat,
+                linear-gradient(#000 0 0) 0 17px / 100% calc(100% - 17px) no-repeat;
+                    mask:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 420 18' preserveAspectRatio='none'%3E%3Cpath d='M0 18 L0.0 5.6 L9.9 7.1 L20.3 9.9 L25.9 3.1 L38.5 5.9 L45.6 14.0 L54.8 12.2 L64.1 10.0 L70.4 10.0 L83.3 8.8 L94.9 10.4 L100.5 11.3 L110.8 6.3 L116.1 12.5 L125.4 10.9 L138.3 10.9 L151.6 7.3 L163.8 7.9 L177.2 12.7 L183.1 4.5 L190.0 13.6 L198.9 9.9 L206.7 8.6 L215.1 6.9 L225.4 9.4 L238.5 10.5 L251.9 12.4 L265.8 10.4 L272.3 12.5 L286.0 13.0 L296.1 10.9 L303.0 12.1 L313.1 6.1 L318.7 12.4 L332.6 4.0 L344.8 7.5 L351.2 6.2 L363.1 12.6 L368.5 9.8 L373.9 10.9 L381.9 12.7 L395.7 8.6 L409.7 6.4 L415.4 9.6 L420.0 5.2 L420 18 Z' fill='%23F4EFE6'/%3E%3C/svg%3E") top / 100% 18px no-repeat,
+                linear-gradient(#000 0 0) 0 17px / 100% calc(100% - 17px) no-repeat;
+            padding-top: 30px;
+        }
+
+        .toast-banner {
+            border-radius: 4px;
+        }
+
+        /* ==========================================================================
            MEDIA QUERIES ADAPTATIVAS (CELULARES REAIS, TELAS COMPACTAS E PAISAGEM)
            ========================================================================== */
         @media (max-width: 520px) {
@@ -2094,6 +2805,18 @@
             .mobile-modal-sheet,
             .profile-drawer-sheet {
                 max-width: 100%;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .welcome-speech {
+                width: 110px;
+                height: 82px;
+                left: -6px;
+            }
+
+            .welcome-speech span {
+                font-size: 12px;
             }
         }
 
@@ -2172,7 +2895,7 @@
                 <div class="blur-ring-orb orb-3"></div>
             </div>
 
-            <div class="welcome-top-pill">
+            <div class="welcome-top-pill taped">
                 <span class="live-dot"></span>
                 <!-- Ícone fofinho de vasinho salpicado -->
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -2184,7 +2907,10 @@
             </div>
 
             <div class="welcome-center">
-                <div class="welcome-stall-card">
+                <div class="welcome-speech" aria-hidden="true">
+                    <span>Vem ver o barro<br>virar peça!</span>
+                </div>
+                <div class="welcome-stall-card taped">
                     <svg viewBox="0 0 164 152" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <circle cx="82" cy="80" r="60" fill="#E4EEFC"/>
                         <rect x="26" y="38" width="6" height="90" rx="3" fill="#C89D7C"/>
@@ -2224,7 +2950,7 @@
                     </svg>
                 </div>
 
-                <h1 class="welcome-title">Feira Virtual de <span>Processos</span></h1>
+                <h1 class="welcome-title"><span class="title-paper">Feira Virtual de</span> <span class="title-cut">Processos</span></h1>
                 <p class="welcome-subtitle">
                     Cada peça de barro carrega dias de torno, fogo e histórias reais. Escolha como você quer entrar hoje na feira.
                 </p>
@@ -2317,6 +3043,12 @@
                 <button type="button" class="fair-pill-btn" onclick="filterFairBooths(this, 'pracaxv')">
                     <span>Praça XV (Sáb)</span>
                 </button>
+                <button type="button" class="fair-pill-btn" onclick="filterFairBooths(this, 'paz')">
+                    <span>Praça N. Sra. da Paz</span>
+                </button>
+                <button type="button" class="fair-pill-btn" onclick="filterFairBooths(this, 'carandai')">
+                    <span>Carandaí 25</span>
+                </button>
             </div>
 
             <!-- Banner de Acesso Rápido ao Calendário & Divulgação de Feiras do RJ -->
@@ -2353,7 +3085,7 @@
                                     <span class="booth-artisan-sub">Malu Pinheiro • Santa Teresa, RJ</span>
                                 </div>
                             </div>
-                            <button type="button" class="btn-booth-fav" onclick="toggleBoothFavorite(this)" aria-label="Favoritar barraca">♡</button>
+                            <button type="button" class="btn-booth-fav liked" onclick="toggleBoothFavorite(this)" aria-label="Favoritar barraca">♥</button>
                         </div>
 
                         <p class="booth-bio-copy">
@@ -2361,18 +3093,18 @@
                         </p>
 
                         <div class="booth-triptych-grid">
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80" data-fallback-label="01. Barro" data-fallback-bg="#D95D39" alt="Etapa 1">
-                                <span class="triptych-pill">01. Barro</span>
-                            </div>
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1593115057322-e94b77572f20?auto=format&fit=crop&w=400&q=80" data-fallback-label="02. Torno" data-fallback-bg="#1B4D5C" alt="Etapa 2">
-                                <span class="triptych-pill">02. Modelagem</span>
-                            </div>
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=400&q=80" data-fallback-label="03. Forno" data-fallback-bg="#8C4A2B" alt="Etapa 3">
-                                <span class="triptych-pill">03. Forno</span>
-                            </div>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80" data-fallback-label="Pratinho com coração em relevo" data-fallback-bg="#D95D39" alt="Pratinho com coração em relevo">
+                                <span class="triptych-pill price-tag">R$ 88</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1593115057322-e94b77572f20?auto=format&fit=crop&w=400&q=80" data-fallback-label="Caneca tátil modelada à mão" data-fallback-bg="#1B4D5C" alt="Caneca tátil modelada à mão">
+                                <span class="triptych-pill price-tag">R$ 95</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=400&q=80" data-fallback-label="Conjunto de pratinhos esmaltados" data-fallback-bg="#2A4FC0" alt="Conjunto de pratinhos esmaltados">
+                                <span class="triptych-pill price-tag">R$ 160</span>
+                            </figure>
                         </div>
 
                         <div class="booth-tags-wrap">
@@ -2385,15 +3117,15 @@
                             <button type="button" class="btn-visit-booth primary-clay" onclick="openArtisanDrawer('mika')">
                                 <span>🏺 Visitar Bancada &amp; Processos</span>
                             </button>
-                            <button type="button" class="btn-booth-quick-info" onclick="openShareModalFor('Mika Handmade')" title="Postar foto desta barraca">
+                            <button type="button" class="btn-booth-quick-info" onclick="openShareModalFor('Mika Handmade')" title="Postar foto desta barraca" aria-label="Postar foto desta barraca">
                                 <span>📷</span>
                             </button>
                         </div>
                     </div>
                 </article>
 
-                <!-- BARRACA 02: DONA MARTA CERÂMICAS -->
-                <article class="artisanal-booth-card" data-booth-id="marta" data-fair-keys="pracaxv">
+                <!-- BARRACA 02: MESTRE DJANIRA -->
+                <article class="artisanal-booth-card" data-booth-id="djanira" data-fair-keys="pracaxv">
                     <div class="booth-awning-header theme-clay">
                         <span class="awning-loc-pill">📍 Bancada #14 • Praça XV</span>
                         <span class="awning-status-pill soft-cream">🔥 Fornada Fresca</span>
@@ -2402,104 +3134,161 @@
                         <div class="booth-profile-row">
                             <div class="booth-profile-left">
                                 <div class="booth-avatar-wrap">
-                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=240&q=85" data-fallback-label="Marta" data-fallback-bg="#8C4A2B" alt="Dona Marta" class="booth-avatar-img">
+                                    <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=240&q=85" data-fallback-label="Djanira" data-fallback-bg="#B54322" alt="Mestre Djanira" class="booth-avatar-img">
                                     <span class="booth-verified-dot">✓</span>
                                 </div>
                                 <div>
-                                    <h3 class="booth-artisan-title">Dona Marta Cerâmicas</h3>
-                                    <span class="booth-artisan-sub">Terracota Carioca • 28 anos de Torno</span>
+                                    <h3 class="booth-artisan-title">Mestre Djanira</h3>
+                                    <span class="booth-artisan-sub">Terracota Carioca • 40 anos de Torno</span>
                                 </div>
                             </div>
                             <button type="button" class="btn-booth-fav" onclick="toggleBoothFavorite(this)" aria-label="Favoritar barraca">♡</button>
                         </div>
 
                         <p class="booth-bio-copy">
-                            Quase três décadas moldando panelas de barro refratário, cumbucas tradicionais e travessas rústicas queimadas em forno de alta temperatura.
+                            40 anos moldando panelas de barro refratário, potes tradicionais e travessas rústicas fluminenses queimadas em forno a lenha comunitário em Guaratiba.
                         </p>
 
                         <div class="booth-triptych-grid">
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80" data-fallback-label="Sova Manual" data-fallback-bg="#8C4A2B" alt="Sova">
-                                <span class="triptych-pill">Sova Manual</span>
-                            </div>
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=400&q=80" data-fallback-label="Torno" data-fallback-bg="#D95D39" alt="Cumbucas">
-                                <span class="triptych-pill">Torno</span>
-                            </div>
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1525974160448-038dacadcc71?auto=format&fit=crop&w=400&q=80" data-fallback-label="Terracota" data-fallback-bg="#1B4D5C" alt="Peças">
-                                <span class="triptych-pill">Terracota</span>
-                            </div>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=400&q=80" data-fallback-label="Panela de barro refratário" data-fallback-bg="#B54322" alt="Panela de barro refratário">
+                                <span class="triptych-pill price-tag">R$ 130</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1525974160448-038dacadcc71?auto=format&fit=crop&w=400&q=80" data-fallback-label="Travessa rústica de terracota" data-fallback-bg="#8C4A2B" alt="Travessa rústica de terracota">
+                                <span class="triptych-pill price-tag">R$ 110</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?auto=format&fit=crop&w=400&q=80" data-fallback-label="Pote tradicional de argila vermelha" data-fallback-bg="#D95D39" alt="Pote tradicional de argila vermelha">
+                                <span class="triptych-pill price-tag">R$ 45</span>
+                            </figure>
                         </div>
 
                         <div class="booth-tags-wrap">
                             <span class="craft-pill">Torno Tradicional</span>
+                            <span class="craft-pill sand">Queima a Lenha</span>
                             <span class="craft-pill olive">Argila Vermelha</span>
-                            <span class="craft-pill sand">Utilitários</span>
                         </div>
 
                         <div class="booth-cta-row">
-                            <button type="button" class="btn-visit-booth" onclick="openArtisanDrawer('marta')">
-                                <span>🏺 Visitar Bancada &amp; Processos</span>
+                            <button type="button" class="btn-visit-booth" onclick="openArtisanDrawer('djanira')">
+                                <span>🍲 Ver Travessas &amp; Peças</span>
                             </button>
-                            <button type="button" class="btn-booth-quick-info" onclick="openShareModalFor('Dona Marta Cerâmicas')" title="Postar foto desta barraca">
+                            <button type="button" class="btn-booth-quick-info" onclick="openShareModalFor('Mestre Djanira')" title="Postar foto desta barraca" aria-label="Postar foto desta barraca">
                                 <span>📷</span>
                             </button>
                         </div>
                     </div>
                 </article>
 
-                <!-- BARRACA 03: OFICINA SEU JORGE -->
-                <article class="artisanal-booth-card" data-booth-id="jorge" data-fair-keys="gloria pracaxv">
+                <!-- BARRACA 03: ATELIÊ ZÉ DO BARRO -->
+                <article class="artisanal-booth-card" data-booth-id="ze" data-fair-keys="paz">
                     <div class="booth-awning-header theme-olive">
-                        <span class="awning-loc-pill">📍 Bancada #22 • Glória &amp; Praça XV</span>
-                        <span class="awning-status-pill soft-olive">🌿 Esmalte de Cinzas</span>
+                        <span class="awning-loc-pill">📍 Bancada #22 • Praça N. Sra. da Paz</span>
+                        <span class="awning-status-pill soft-olive">Restam 4 peças</span>
                     </div>
                     <div class="booth-card-body">
                         <div class="booth-profile-row">
                             <div class="booth-profile-left">
                                 <div class="booth-avatar-wrap">
-                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=85" data-fallback-label="Jorge" data-fallback-bg="#1B4D5C" alt="Seu Jorge" class="booth-avatar-img">
+                                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=85" data-fallback-label="Barro" data-fallback-bg="#1B4D5C" alt="Ateliê Zé do Barro" class="booth-avatar-img">
                                     <span class="booth-verified-dot">✓</span>
                                 </div>
                                 <div>
-                                    <h3 class="booth-artisan-title">Oficina Seu Jorge</h3>
-                                    <span class="booth-artisan-sub">Jorge Vasconcelos • Botânica &amp; Grés</span>
+                                    <h3 class="booth-artisan-title">Ateliê Zé do Barro</h3>
+                                    <span class="booth-artisan-sub">Zé &amp; Bento • Botânica Tijucana</span>
                                 </div>
                             </div>
                             <button type="button" class="btn-booth-fav" onclick="toggleBoothFavorite(this)" aria-label="Favoritar barraca">♡</button>
                         </div>
 
                         <p class="booth-bio-copy">
-                            Vasos esculturais para plantas, bules de chá e tigelas em grés com esmaltes minerais criados a partir de cinzas de poda urbana do Rio.
+                            Vasos esculturais para plantas e botânica urbana. Cerâmica contemporânea com ranhuras táteis inspirada nas rochas e folhas da Floresta da Tijuca.
                         </p>
 
                         <div class="booth-triptych-grid">
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=400&q=80" data-fallback-label="Botânica" data-fallback-bg="#1B4D5C" alt="Vasos">
-                                <span class="triptych-pill">Botânica</span>
-                            </div>
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=400&q=80" data-fallback-label="Grés" data-fallback-bg="#8C4A2B" alt="Bule">
-                                <span class="triptych-pill">Grés</span>
-                            </div>
-                            <div class="triptych-item">
-                                <img src="https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?auto=format&fit=crop&w=400&q=80" data-fallback-label="Cinzas" data-fallback-bg="#D95D39" alt="Esmalte">
-                                <span class="triptych-pill">Cinzas</span>
-                            </div>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=400&q=80" data-fallback-label="Vaso escultural com planta" data-fallback-bg="#1B4D5C" alt="Vaso escultural com planta">
+                                <span class="triptych-pill price-tag">R$ 145</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?auto=format&fit=crop&w=400&q=80" data-fallback-label="Cachepô com textura mineral" data-fallback-bg="#2B6D80" alt="Cachepô com textura mineral">
+                                <span class="triptych-pill price-tag">R$ 120</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=400&q=80" data-fallback-label="Vaso com ranhuras táteis" data-fallback-bg="#123742" alt="Vaso com ranhuras táteis">
+                                <span class="triptych-pill price-tag">R$ 175</span>
+                            </figure>
                         </div>
 
                         <div class="booth-tags-wrap">
-                            <span class="craft-pill olive">Esmalte de Cinzas</span>
-                            <span class="craft-pill">Modelagem Livre</span>
-                            <span class="craft-pill sand">1260°C</span>
+                            <span class="craft-pill olive">Modelagem Escultórica</span>
+                            <span class="craft-pill">Plantas &amp; Cachepôs</span>
+                            <span class="craft-pill sand">Textura Mineral</span>
                         </div>
 
                         <div class="booth-cta-row">
-                            <button type="button" class="btn-visit-booth" onclick="openArtisanDrawer('jorge')">
-                                <span>🏺 Visitar Bancada &amp; Processos</span>
+                            <button type="button" class="btn-visit-booth" onclick="openArtisanDrawer('ze')">
+                                <span>🌿 Ver Coleção Botânica</span>
                             </button>
-                            <button type="button" class="btn-booth-quick-info" onclick="openShareModalFor('Oficina Seu Jorge')" title="Postar foto desta barraca">
+                            <button type="button" class="btn-booth-quick-info" onclick="openShareModalFor('Ateliê Zé do Barro')" title="Postar foto desta barraca" aria-label="Postar foto desta barraca">
+                                <span>📷</span>
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- BARRACA 04: CLARA MAR CERAMICS -->
+                <article class="artisanal-booth-card" data-booth-id="clara" data-fair-keys="carandai">
+                    <div class="booth-awning-header theme-sky">
+                        <span class="awning-loc-pill">📍 Bancada #03 • Circuito Carandaí 25</span>
+                        <span class="awning-status-pill soft-cream">Torno ao Vivo 15h</span>
+                    </div>
+                    <div class="booth-card-body">
+                        <div class="booth-profile-row">
+                            <div class="booth-profile-left">
+                                <div class="booth-avatar-wrap">
+                                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=240&q=85" data-fallback-label="Ceramics" data-fallback-bg="#2A4FC0" alt="Clara Mar Ceramics" class="booth-avatar-img">
+                                    <span class="booth-verified-dot">✓</span>
+                                </div>
+                                <div>
+                                    <h3 class="booth-artisan-title">Clara Mar Ceramics</h3>
+                                    <span class="booth-artisan-sub">Clara • Cores da Orla Carioca</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-booth-fav" onclick="toggleBoothFavorite(this)" aria-label="Favoritar barraca">♡</button>
+                        </div>
+
+                        <p class="booth-bio-copy">
+                            Cores da arrebentação de Ipanema traduzidas em cerâmica de alta temperatura com esmaltes reagentes azuis fluidos e areia fina filtrada da praia.
+                        </p>
+
+                        <div class="booth-triptych-grid">
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=400&q=80" data-fallback-label="Caneca com esmalte reagente azul" data-fallback-bg="#2A4FC0" alt="Caneca com esmalte reagente azul">
+                                <span class="triptych-pill price-tag">R$ 82</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=400&q=80" data-fallback-label="Tigela azul de alta temperatura" data-fallback-bg="#3A64E8" alt="Tigela azul de alta temperatura">
+                                <span class="triptych-pill price-tag">R$ 115</span>
+                            </figure>
+                            <figure class="triptych-item">
+                                <img src="https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?auto=format&fit=crop&w=400&q=80" data-fallback-label="Prato com areia da praia" data-fallback-bg="#1B4D5C" alt="Prato com areia da praia">
+                                <span class="triptych-pill price-tag">R$ 98</span>
+                            </figure>
+                        </div>
+
+                        <div class="booth-tags-wrap">
+                            <span class="craft-pill olive">Esmalte Reagente</span>
+                            <span class="craft-pill">Alta Temperatura</span>
+                            <span class="craft-pill sand">Bossa Carioca</span>
+                        </div>
+
+                        <div class="booth-cta-row">
+                            <button type="button" class="btn-visit-booth" onclick="openArtisanDrawer('clara')">
+                                <span>🌊 Ver Peças Azuis</span>
+                            </button>
+                            <button type="button" class="btn-booth-quick-info" onclick="openShareModalFor('Clara Mar Ceramics')" title="Postar foto desta barraca" aria-label="Postar foto desta barraca">
                                 <span>📷</span>
                             </button>
                         </div>
@@ -2512,7 +3301,7 @@
             <div class="mural-wrapper">
                 <div style="margin-bottom: 14px;">
                     <span class="eyebrow-label">Afeto que Continua em Casa</span>
-                    <h2 class="screen-heading">Peças na Vida Real</h2>
+                    <h2 class="screen-heading">Peças na Vida Real <span class="heading-tag">da comunidade</span></h2>
                     <p class="screen-sub">Registros enviados por visitantes que compraram peças diretamente com os feirantes.</p>
                 </div>
 
@@ -2538,10 +3327,10 @@
                     </article>
 
                     <article class="masonry-post-card">
-                        <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=450&q=80" data-fallback-label="Cumbuca Barro" data-fallback-bg="#8C4A2B" alt="Cumbuca" class="masonry-post-img" style="height: 120px;">
+                        <img src="https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=450&q=80" data-fallback-label="Panela de Barro" data-fallback-bg="#8C4A2B" alt="Panela de barro" class="masonry-post-img" style="height: 120px;">
                         <div class="masonry-post-body">
-                            <span class="masonry-artisan-pill">Dona Marta Cerâmicas</span>
-                            <p class="masonry-post-caption">"A textura do barro por fora lembra areia da praia. Uso todo dia!"</p>
+                            <span class="masonry-artisan-pill">Mestre Djanira</span>
+                            <p class="masonry-post-caption">"O feijão de domingo na panela da Djanira tem outro gosto. Vai do fogão direto pra mesa."</p>
                             <div class="masonry-post-footer">
                                 <span>Lucas M.</span>
                                 <button type="button" class="btn-heart-like" onclick="toggleWallHeart(this)">
@@ -2555,8 +3344,8 @@
                     <article class="masonry-post-card">
                         <img src="https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=450&q=80" data-fallback-label="Vaso Botânico" data-fallback-bg="#1B4D5C" alt="Vaso botânico" class="masonry-post-img" style="height: 135px;">
                         <div class="masonry-post-body">
-                            <span class="masonry-artisan-pill">Oficina Seu Jorge</span>
-                            <p class="masonry-post-caption">"Saber que o esmalte veio de cinzas de poda deixou o vaso ainda mais especial."</p>
+                            <span class="masonry-artisan-pill">Ateliê Zé do Barro</span>
+                            <p class="masonry-post-caption">"As ranhuras do vaso parecem pedra da Tijuca. Minha costela-de-adão nunca esteve tão bem."</p>
                             <div class="masonry-post-footer">
                                 <span>Beatriz S.</span>
                                 <button type="button" class="btn-heart-like" onclick="toggleWallHeart(this)">
@@ -2568,10 +3357,10 @@
                     </article>
 
                     <article class="masonry-post-card">
-                        <img src="https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=450&q=80" data-fallback-label="Bule de Chá" data-fallback-bg="#B54322" alt="Bule de chá" class="masonry-post-img" style="height: 148px;">
+                        <img src="https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&w=450&q=80" data-fallback-label="Tigela Azul" data-fallback-bg="#2A4FC0" alt="Tigela azul" class="masonry-post-img" style="height: 148px;">
                         <div class="masonry-post-body">
-                            <span class="masonry-artisan-pill">Dona Marta Cerâmicas</span>
-                            <p class="masonry-post-caption">"Segura o calor por muito tempo e não pinga no bico. Obra de arte!"</p>
+                            <span class="masonry-artisan-pill">Clara Mar Ceramics</span>
+                            <p class="masonry-post-caption">"O azul do esmalte muda com a luz da janela. Parece o mar de Ipanema às 7 da manhã."</p>
                             <div class="masonry-post-footer">
                                 <span>Rafael T.</span>
                                 <button type="button" class="btn-heart-like" onclick="toggleWallHeart(this)">
@@ -2624,7 +3413,7 @@
                 </div>
 
                 <!-- Formulário de Autenticação Privada (Sem atalhos públicos de outras contas) -->
-                <form id="artisan-login-form" class="form-card" onsubmit="handleArtisanLogin(event)" autocomplete="off">
+                <form id="artisan-login-form" class="form-card notebook-card" onsubmit="handleArtisanLogin(event)" autocomplete="off">
                     <div class="field-group">
                         <label for="login-email" class="field-label">Seu e-mail cadastrado</label>
                         <input type="email" id="login-email" class="field-input" placeholder="Ex: mika@feira.com" autocomplete="username" required>
@@ -2650,7 +3439,7 @@
                 </form>
 
                 <div class="security-note-box">
-                    <span style="font-size: 16px; line-height: 1;">🔒</span>
+                    <img src="assets/exclamacao.png" alt="" class="note-exclaim" width="20" height="53">
                     <span>
                         <strong>Proteção de Perfil:</strong> Cada artesão possui credenciais próprias. Nenhuma barraca exibe atalhos ou permite acesso ao painel de outro expositor.
                     </span>
@@ -3053,8 +3842,9 @@
                         <label for="cust-artisan-select" class="field-label">2. De qual barraquinha é a peça?</label>
                         <select id="cust-artisan-select" class="field-select">
                             <option value="Mika Handmade">Mika Handmade</option>
-                            <option value="Dona Marta Cerâmicas">Dona Marta Cerâmicas</option>
-                            <option value="Oficina Seu Jorge">Oficina Seu Jorge</option>
+                            <option value="Mestre Djanira">Mestre Djanira</option>
+                            <option value="Ateliê Zé do Barro">Ateliê Zé do Barro</option>
+                            <option value="Clara Mar Ceramics">Clara Mar Ceramics</option>
                         </select>
                     </div>
 
@@ -3401,16 +4191,16 @@
                     }
                 ]
             },
-            marta: {
-                id: 'marta',
-                email: 'marta@feira.com',
+            djanira: {
+                id: 'djanira',
+                email: 'djanira@feira.com',
                 password: '123456',
-                name: 'Dona Marta Cerâmicas',
-                owner: 'Marta Oliveira',
+                name: 'Mestre Djanira',
+                owner: 'Djanira Santos',
                 fairs: ['Praça XV (Sáb)'],
-                years: '28 anos de torno',
+                years: '40 anos de torno',
                 avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=240&q=85',
-                bio: 'Quase três décadas moldando panelas de barro refratário, cumbucas tradicionais e travessas rústicas queimadas em forno de alta temperatura.',
+                bio: 'Terracota carioca. 40 anos moldando panelas de barro refratário, potes tradicionais e travessas rústicas fluminenses queimadas em forno a lenha comunitário em Guaratiba.',
                 qrScans: 0,
                 steps: [
                     {
@@ -3420,48 +4210,90 @@
                         img: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=600&q=80'
                     },
                     {
-                        title: 'Queima em Alta Temperatura',
+                        title: 'Queima no Forno a Lenha de Guaratiba',
                         time: '20 horas',
-                        desc: 'Vitrificação natural garantindo resistência térmica para ir direto à mesa.',
+                        desc: 'Fornada comunitária a lenha que deixa marcas de fogo únicas e garante resistência para ir direto ao fogão.',
                         img: 'https://images.unsplash.com/photo-1525974160448-038dacadcc71?auto=format&fit=crop&w=600&q=80'
                     }
                 ],
                 interactions: [
                     {
                         author: 'Lucas M.',
-                        piece: 'Cumbuca Rústica',
-                        msg: 'A textura do barro por fora lembra areia da praia. Uso todo dia!',
+                        piece: 'Panela de Barro',
+                        msg: 'O feijão de domingo na panela da Djanira tem outro gosto. Vai do fogão direto pra mesa.',
                         photo: 'https://images.unsplash.com/photo-1578749556568-bc2c40e68b61?auto=format&fit=crop&w=240&q=80',
                         loved: false,
                         featured: true
                     }
                 ]
             },
-            jorge: {
-                id: 'jorge',
-                email: 'jorge@feira.com',
+            ze: {
+                id: 'ze',
+                email: 'ze@feira.com',
                 password: '123456',
-                name: 'Oficina Seu Jorge',
-                owner: 'Jorge Vasconcelos',
-                fairs: ['Feira da Glória (Dom)', 'Praça XV (Sáb)'],
-                years: '19 anos de bancada',
+                name: 'Ateliê Zé do Barro',
+                owner: 'Zé & Bento',
+                fairs: ['Praça N. Sra. da Paz'],
+                years: 'Botânica Tijucana',
                 avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=240&q=85',
-                bio: 'Vasos esculturais para plantas, bules de chá e tigelas em grés com esmaltes minerais criados a partir de cinzas de poda urbana do Rio.',
+                bio: 'Vasos esculturais para plantas e botânica urbana. Cerâmica contemporânea com ranhuras táteis inspirada nas rochas e folhas da Floresta da Tijuca.',
                 qrScans: 0,
                 steps: [
                     {
-                        title: 'Formulação de Esmalte de Cinzas',
-                        time: '4 dias',
-                        desc: 'Peneiramento de cinzas vegetais e mistura com feldspato para tons verdes e terrosos únicos.',
+                        title: 'Modelagem Escultórica em Placas',
+                        time: '3 horas/peça',
+                        desc: 'Construção do vaso em placas de grés e entalhe das ranhuras inspiradas nas pedras da Tijuca.',
                         img: 'https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=600&q=80'
+                    },
+                    {
+                        title: 'Textura Mineral & Queima',
+                        time: '2 dias',
+                        desc: 'Engobe com pó de rocha e queima redutora para o acabamento fosco e mineral.',
+                        img: 'https://images.unsplash.com/photo-1493106641515-6b5631de4bb9?auto=format&fit=crop&w=600&q=80'
                     }
                 ],
                 interactions: [
                     {
                         author: 'Beatriz S.',
                         piece: 'Vaso Botânico',
-                        msg: 'Saber que o esmalte veio de cinzas de poda deixou o vaso ainda mais especial.',
+                        msg: 'As ranhuras do vaso parecem pedra da Tijuca. Minha costela-de-adão nunca esteve tão bem.',
                         photo: 'https://images.unsplash.com/photo-1612196808214-b8e1d6145a8c?auto=format&fit=crop&w=240&q=80',
+                        loved: false,
+                        featured: true
+                    }
+                ]
+            },
+            clara: {
+                id: 'clara',
+                email: 'clara@feira.com',
+                password: '123456',
+                name: 'Clara Mar Ceramics',
+                owner: 'Clara',
+                fairs: ['Circuito Carandaí 25'],
+                years: 'Cores da Orla Carioca',
+                avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=240&q=85',
+                bio: 'Cores da arrebentação de Ipanema traduzidas em cerâmica de alta temperatura com esmaltes reagentes azuis fluidos e areia fina filtrada da praia.',
+                qrScans: 0,
+                steps: [
+                    {
+                        title: 'Torno ao Vivo',
+                        time: '30 min/peça',
+                        desc: 'Tigelas e canecas torneadas na hora, toda tarde às 15h na bancada do Carandaí.',
+                        img: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=600&q=80'
+                    },
+                    {
+                        title: 'Esmalte Reagente com Areia da Praia',
+                        time: '22 horas',
+                        desc: 'Areia fina de Ipanema peneirada no esmalte azul, que escorre e reage no forno a 1.260°C.',
+                        img: 'https://images.unsplash.com/photo-1514228742587-6b1558fcca3d?auto=format&fit=crop&w=600&q=80'
+                    }
+                ],
+                interactions: [
+                    {
+                        author: 'Rafael T.',
+                        piece: 'Tigela Azul',
+                        msg: 'O azul do esmalte muda com a luz da janela. Parece o mar de Ipanema às 7 da manhã.',
+                        photo: 'https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=240&q=80',
                         loved: false,
                         featured: true
                     }
@@ -3557,7 +4389,7 @@
                 registrationFee: 'R$ 60,00 (rateio de lenha e limpeza)',
                 artisanShare: 90,
                 fairShare: 10,
-                author: 'Jorge Vasconcelos (Artesão)'
+                author: 'Zé do Barro (Artesão)'
             }
         ];
 
@@ -4400,6 +5232,8 @@
             const joined = art.fairs.join(' ').toLowerCase();
             if (joined.includes('glória') || joined.includes('gloria')) keys += ' gloria';
             if (joined.includes('praça xv') || joined.includes('praca xv')) keys += ' pracaxv';
+            if (joined.includes('paz')) keys += ' paz';
+            if (joined.includes('carandaí') || joined.includes('carandai')) keys += ' carandai';
             card.setAttribute('data-fair-keys', keys);
         }
 
@@ -4409,6 +5243,8 @@
             const joined = art.fairs.join(' ').toLowerCase();
             if (joined.includes('glória') || joined.includes('gloria')) keys += ' gloria';
             if (joined.includes('praça xv') || joined.includes('praca xv')) keys += ' pracaxv';
+            if (joined.includes('paz')) keys += ' paz';
+            if (joined.includes('carandaí') || joined.includes('carandai')) keys += ' carandai';
 
             const card = document.createElement('article');
             card.className = 'artisanal-booth-card';
